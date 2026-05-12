@@ -15,7 +15,7 @@ const Contact = () => {
         <div className='flex flex-col justify-center items-start gap-6'>
           <p className='font-semibold text-xl text-[#646661]'>Our Store</p>
           <p className='text-[#767873]'>LE TRUE | 44 HaYarkon St <br /> Tel Aviv-Yafo, Israel</p>
-          <p className='text-[#767873]'>Tel: +972-50-444-4444 <br /> Email: letrue@gmail.com</p>
+          <p className='text-[#767873]'>Tel: +972-53-594-4674 <br /> Email: interproduct95@gmail.com</p>
         </div>
       </div>
     </div>

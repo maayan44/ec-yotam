@@ -30,8 +30,8 @@ const Footer = () => {
         <div>
           <p className='text-base font-semibold mb-5 text-white'>צור קשר</p>
           <ul className='flex flex-col gap-3 text-white/50'>
-            <li className='hover:text-white transition-colors cursor-pointer'>050-444-4444</li>
-            <li className='hover:text-white transition-colors cursor-pointer'>info@ygarage.co.il</li>
+            <li className='hover:text-white transition-colors cursor-pointer'>053-594-4674</li>
+            <li className='hover:text-white transition-colors cursor-pointer'>interproduct95@gmail.com</li>
           </ul>
         </div>
 

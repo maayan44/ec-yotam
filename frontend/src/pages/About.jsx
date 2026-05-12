@@ -11,7 +11,7 @@ const About = () => {
         <Title text1={'אודות'} text2={'החברה'} />
       </div>
 
-      <div className='my-10 flex flex-col md:flex-row gap-16'>
+      <div className='my-10 flex flex-col md:flex-row gap-16 items-center justify-center'>
         {/* Video instead of image */}
         <video
           className='w-full md:max-w-[450px] object-cover'
