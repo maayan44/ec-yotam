@@ -9,7 +9,7 @@ const Footer = () => {
 
         {/* Brand column */}
         <div>
-          <img src={assets.logo} className='mb-5 w-40' alt="YGarage" />
+          <img src={assets.logo} className='mb-5 w-30' alt="YGarage" />
           <p className='w-full md:w-2/3 text-white/50 leading-relaxed'>
             YGarage מספקת כלי גראז' ואביזרי רכב מקצועיים. משלוח מהיר לכל הארץ, מחירים תחרותיים ושירות אמין.
           </p>

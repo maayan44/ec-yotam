@@ -18,7 +18,7 @@ const Navbar = () => {
         <div className='flex items-center justify-between py-4 px-8 font-medium bg-[#1A1A1A]'>
 
             <Link to={'/'}>
-                <img src={assets.logo} className='w-44' alt="YGarage" />
+                <img src={assets.logo} className='w-34' alt="YGarage" />
             </Link>
 
             {/* Desktop nav - center */}
