@@ -11,7 +11,7 @@ const Footer = () => {
         <div>
           <img src={assets.logo} className='mb-5 w-30' alt="YGarage" />
           <p className='w-full md:w-2/3 text-white/50 leading-relaxed'>
-            YGarage מספקת כלי גראז' ואביזרי רכב מקצועיים. משלוח מהיר לכל הארץ, מחירים תחרותיים ושירות אמין.
+            INTERPRODUCT מספקת מוצרי טיפוח לרכב ואביזרי רכב מקצועיים. משלוח מהיר לכל הארץ, מחירים תחרותיים ושירות אמין.
           </p>
         </div>
 
@@ -40,7 +40,7 @@ const Footer = () => {
       <div className='px-8'>
         <hr className='border-white/10' />
         <p className='py-5 text-xs text-center text-white/30'>
-          © 2026 YGarage.co.il — כל הזכויות שמורות &nbsp;·&nbsp; Ciano Webs
+          © 2026 Interproduct.co.il — כל הזכויות שמורות &nbsp;·&nbsp; Ciano Webs
         </p>
       </div>
 
