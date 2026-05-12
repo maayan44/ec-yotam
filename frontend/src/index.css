@@ -1,24 +1,34 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600&family=Heebo:wght@400;500;700;800&display=swap');
 @import "tailwindcss";
 
-a.active hr{
-    display: block
+a.active hr {
+    display: block;
 }
 
-{/* Colors Set: 
-    Main: #00000 and #ffffff
-    Capsule: #767873 and #e9e0d7
-    Equivalent: gray-700 -> [#535551], gray-600 -> [#646661], gray500 -> [#767873], gray-400 -> [#A3A5A1] */}
+/* Colors Set: 
+   Primary:   #C0001A (Engine Red)
+   Dark:      #1A1A1A (Garage Black)
+   Cards:     #F5F5F0 (Workshop White)
+   Muted:     #8C8C8C (Steel Gray)
+   Capsule:   #767873 and #e9e0d7
+   gray-700 -> [#535551], gray-600 -> [#646661], gray-500 -> [#767873], gray-400 -> [#A3A5A1] */
 
 body {
-    font-family: Outfit, sans-serif;
+    font-family: 'Heebo', 'Barlow', sans-serif;
+    direction: rtl;
+}
+
+h1, h2, h3, h4, h5, h6, .font-heading {
+    font-family: 'Heebo', 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    letter-spacing: 0.01em;
 }
 
 ::-webkit-scrollbar {
     display: none;
 }
 
-@media (max-width:640px) {
+@media (max-width: 640px) {
     a.active {
         background-color: black;
         color: white;

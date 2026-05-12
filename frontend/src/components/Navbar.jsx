@@ -15,72 +15,89 @@ const Navbar = () => {
     }
 
     return (
-        <div className='flex items-center justify-between py-5 font-medium'>
+        <div className='flex items-center justify-between py-4 px-8 font-medium bg-[#1A1A1A]'>
 
             <Link to={'/'}>
-                <img src={assets.logo} className='w-40' alt="" />
+                <img src={assets.logo} className='w-44' alt="YGarage" />
             </Link>
 
-            <ul className='hidden sm:flex gap-5 text-sm text-[#535551]'>
+            {/* Desktop nav - center */}
+            <ul className='hidden sm:flex gap-6 text-sm text-white/60'>
                 <NavLink to='/' className='flex flex-col items-center gap-1'>
-                    <p>HOME</p>
-                    <hr className='w-2/4 border-none h-[1.5px] bg-[#535551] hidden' />
+                    <p>בית</p>
+                    <hr className='w-2/4 border-none h-[1.5px] bg-[#C0001A] hidden' />
                 </NavLink>
 
-                <NavLink to='/archive' className='flex flex-col items-center gap-1'>
-                    <p>ARCHIVE</p>
-                    <hr className='w-2/4 border-none h-[1.5px] bg-[#535551] hidden' />
+                <NavLink to='/collection' className='flex flex-col items-center gap-1'>
+                    <p>קטלוג</p>
+                    <hr className='w-2/4 border-none h-[1.5px] bg-[#C0001A] hidden' />
                 </NavLink>
 
                 <NavLink to='/about' className='flex flex-col items-center gap-1'>
-                    <p>ABOUT</p>
-                    <hr className='w-2/4 border-none h-[1.5px] bg-[#535551] hidden' />
+                    <p>אודות</p>
+                    <hr className='w-2/4 border-none h-[1.5px] bg-[#C0001A] hidden' />
                 </NavLink>
 
                 <NavLink to='/contact' className='flex flex-col items-center gap-1'>
-                    <p>CONTACT</p>
-                    <hr className='w-2/4 border-none h-[1.5px] bg-[#535551] hidden' />
+                    <p>צור קשר</p>
+                    <hr className='w-2/4 border-none h-[1.5px] bg-[#C0001A] hidden' />
                 </NavLink>
             </ul>
 
+            {/* Icons */}
             <div className='flex items-center gap-6'>
-                <img onClick={() => setShowSearch(true)} src={assets.search_icon} className='w-5 cursor-pointer' alt="" />
+                <img
+                    onClick={() => setShowSearch(true)}
+                    src={assets.search_icon}
+                    className='w-5 cursor-pointer invert'
+                    alt="חיפוש"
+                />
 
                 <div className='group relative'>
-                    <img onClick={() => token ? null : navigate('/login')} className='w-5 cursor-pointer' src={assets.profile_icon} alt="" />
-                    {/* Dropdown Menu */}
-                    {token && 
-                    <div className='group-hover:block hidden absolute dropdown-menu right-0 pt-4'>
-                        <div className='flex flex-col gap-2 w-36 py-3 px-5 bg-slate-100 text-[#767873] rounded'>
-                            <p className='cursor-pointer hover:text-black'>My Profile</p>
-                            <p onClick={()=>navigate('/orders')} className='cursor-pointer hover:text-black'>Orders</p>
-                            <p onClick={logout} className='cursor-pointer hover:text-black'>Logout</p>
+                    <img
+                        onClick={() => token ? null : navigate('/login')}
+                        className='w-5 cursor-pointer invert'
+                        src={assets.profile_icon}
+                        alt="פרופיל"
+                    />
+                    {/* Dropdown */}
+                    {token &&
+                    <div className='group-hover:block hidden absolute dropdown-menu left-0 pt-4 z-50'>
+                        <div className='flex flex-col gap-2 w-36 py-3 px-5 bg-[#2a2a2a] text-white/70 rounded text-sm'>
+                            <p className='cursor-pointer hover:text-white'>הפרופיל שלי</p>
+                            <p onClick={() => navigate('/orders')} className='cursor-pointer hover:text-white'>ההזמנות שלי</p>
+                            <p onClick={logout} className='cursor-pointer hover:text-white'>התנתק</p>
                         </div>
                     </div>}
                 </div>
 
                 <Link to='/cart' className='relative'>
-                    <img src={assets.cart_icon} className='w-5 min-w-5' alt="" />
-                    <p className='absolute right-[-5px] bottom-[-5px] w-4 text-center leading-4 bg-black text-white aspect-square rounded-full text-[8px]'>
+                    <img src={assets.cart_icon} className='w-5 min-w-5 invert' alt="סל קניות" />
+                    <p className='absolute left-[-5px] bottom-[-5px] w-4 text-center leading-4 bg-[#C0001A] text-white aspect-square rounded-full text-[8px]'>
                         {getCartCount()}
                     </p>
                 </Link>
 
-                <img onClick={() => setVisible(true)} src={assets.menu_icon} className='w-5 cursor-pointer sm:hidden' alt="" />
+                <img
+                    onClick={() => setVisible(true)}
+                    src={assets.menu_icon}
+                    className='w-5 cursor-pointer sm:hidden invert'
+                    alt="תפריט"
+                />
             </div>
 
-            {/* Sidebar menu for small screens */}
-            <div className={`absolute top-0 right-0 bottom-0 overflow-hidden bg-white transition-all ${visible ? 'w-full' : 'w-0'}`}>
-                <div className='flex flex-col text-[#646661]'> {/* #646661 instead of gray-600 */}
-                    <div onClick={() => setVisible(false)} className='flex items-center gap-4 p-3'>
-                        <img className='h-4 rotate-180' src={assets.dropdown_icon} alt="" />
-                        <p>Back</p>
+            {/* Mobile sidebar */}
+            <div className={`absolute top-0 right-0 bottom-0 overflow-hidden bg-[#1A1A1A] transition-all z-50 ${visible ? 'w-full' : 'w-0'}`}>
+                <div className='flex flex-col text-white/70'>
+                    <div onClick={() => setVisible(false)} className='flex items-center gap-4 p-3 cursor-pointer'>
+                        <img className='h-4' src={assets.dropdown_icon} alt="" />
+                        <p className='text-sm'>חזרה</p>
                     </div>
 
-                    <NavLink onClick={() => setVisible(false)} className='py-2 pl-6 border' to='/'>HOME</NavLink>
-                    <NavLink onClick={() => setVisible(false)} className='py-2 pl-6 border' to='/archive'>ARCHIVE</NavLink>
-                    <NavLink onClick={() => setVisible(false)} className='py-2 pl-6 border' to='/about'>ABOUT</NavLink>
-                    <NavLink onClick={() => setVisible(false)} className='py-2 pl-6 border' to='/contact'>CONTACT</NavLink>
+                    <NavLink onClick={() => setVisible(false)} className='py-3 pr-6 border-b border-white/10 hover:text-white' to='/'>בית</NavLink>
+                    <NavLink onClick={() => setVisible(false)} className='py-3 pr-6 border-b border-white/10 hover:text-white' to='/collection'>קטלוג</NavLink>
+                    <NavLink onClick={() => setVisible(false)} className='py-3 pr-6 border-b border-white/10 hover:text-white' to='/about'>אודות</NavLink>
+                    <NavLink onClick={() => setVisible(false)} className='py-3 pr-6 border-b border-white/10 hover:text-white' to='/contact'>צור קשר</NavLink>
                 </div>
             </div>
 
