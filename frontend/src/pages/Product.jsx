@@ -6,41 +6,43 @@ import RelatedProducts from '../components/RelatedProducts';
 
 const Product = () => {
 
-  const {productId} = useParams();
-  const {products, currency, addToCart} = useContext(ShopContext);
+  const { productId } = useParams();
+  const { products, currency, addToCart } = useContext(ShopContext);
   const [productData, setProductData] = useState(false);
   const [image, setImage] = useState('')
-  const [size, setSize] = useState('')
 
   const fetchProductData = async () => {
-
-    products.map((item)=>{
+    products.map((item) => {
       if (item._id === productId) {
         setProductData(item)
         setImage(item.image[0])
         return null;
       }
     })
-
   }
 
-  useEffect(()=>{
+  useEffect(() => {
     fetchProductData();
-  },[productId, products])
+  }, [productId, products])
 
   return productData ? (
-    <div className='border-t-2  pt-10 transition-opacity ease-in duration-500 opacity-100'>
+    <div className='border-t-2 pt-10 transition-opacity ease-in duration-500 opacity-100'>
+
       {/* Product Data */}
-      <div className='flex gap-12 sm:gap-12 flex-col sm:flex-row'>
+      <div className='flex gap-12 flex-col sm:flex-row'>
 
         {/* Product Images */}
         <div className='flex-1 flex flex-col-reverse gap-3 sm:flex-row'>
           <div className='flex sm:flex-col overflow-x-auto sm:overflow-y-scroll justify-between sm:justify-normal sm:w-[18.7%] w-full'>
-            {
-              productData.image.map((item, index)=>(
-                <img onClick={()=>setImage(item)} src={item} key={index} className='w-[24%] sm:w-full sm:mb-3 flex-shrink-0 cursor-pointer' alt="" />
-              ))
-            }
+            {productData.image.map((item, index) => (
+              <img
+                onClick={() => setImage(item)}
+                src={item}
+                key={index}
+                className='w-[24%] sm:w-full sm:mb-3 flex-shrink-0 cursor-pointer border hover:border-[#C0001A] transition-colors'
+                alt=""
+              />
+            ))}
           </div>
           <div className='w-full sm:w-[80%]'>
             <img className='w-full h-auto' src={image} alt="" />
@@ -49,53 +51,41 @@ const Product = () => {
 
         {/* Product Info */}
         <div className='flex-1'>
-            <h1 className='font-medium text-2xl mt-2'>{productData.name}</h1>
-            <div className='flex items-center gap-1 mt-2'>
-              <img src={assets.star_icon} alt="" className="w-3 5" />
-              <img src={assets.star_icon} alt="" className="w-3 5" />
-              <img src={assets.star_icon} alt="" className="w-3 5" />
-              <img src={assets.star_icon} alt="" className="w-3 5" />
-              <img src={assets.star_dull_icon} alt="" className="w-3 5" />
-              <p className='pl-2'>(122)</p>
-            </div>
-            <p className='mt-5 text-3xl font-medium'>{currency}{productData.price}</p>
-            <p className='mt-5 text-[#767873] md:w-4/5'>{productData.description}</p>
-            <div className='flex flex-col gap-4 my-8'>
-              <p>Select Size</p>
-              <div className='flex gap-2'>
-                {productData.sizes.map((item, index)=>(
-                  <button onClick={() => setSize(item)} className={`border py-2 px-4 bg-gray-100 ${item === size ? 'border-orange-600' : ''} cursor-pointer`} 
-                    key={index}>{item} </button> ))}
-              </div>
-            </div>
-           <button onClick={()=>addToCart(productData._id, size)} className='bg-black text-white px-8 py-3 text-sm active:bg-[#535551] cursor-pointer'>ADD TO CART</button>
-           <hr className='mt-8 sm:w-4/5' />
-           <div className='text-sm text-[#767873] mt-5 flex flex-col gap-1'>
-                <p>100% Original product.</p>
-                <p>Fast delivery is available on this product.</p>
-                <p>Easy return and exchange policy within 7 days.</p>
-           </div>
+          <h1 className='font-medium text-2xl mt-2'>{productData.name}</h1>
+
+          <p className='mt-5 text-3xl font-medium text-[#C0001A]'>{currency}{productData.price}</p>
+          <p className='mt-5 text-[#8C8C8C] md:w-4/5 leading-relaxed'>{productData.description}</p>
+
+          <button
+            onClick={() => addToCart(productData._id, 'default')}
+            className='mt-8 bg-[#1A1A1A] text-white px-8 py-3 text-sm hover:bg-[#C0001A] transition-colors cursor-pointer rounded'
+          >
+            הוסף לסל
+          </button>
+
+          <hr className='mt-8 sm:w-4/5 border-[#F5F5F0]' />
+
+          <div className='text-sm text-[#8C8C8C] mt-5 flex flex-col gap-2'>
+            <p>✅ מוצר מקורי ומקצועי</p>
+            <p>🚚 משלוח מהיר לכל הארץ</p>
+            <p>📞 תמיכה מקצועית לכל שאלה</p>
+          </div>
         </div>
       </div>
 
-      {/* Description & Review Section */}
+      {/* Description Section */}
       <div className='mt-20'>
         <div className='flex'>
-          <b className='border px-5 py-3 text-sm'>Description</b>
-          <p className='border px-5 py-3 text-sm'>Reviews (122)</p>
+          <b className='border px-5 py-3 text-sm bg-[#1A1A1A] text-white'>תיאור המוצר</b>
         </div>
-        <div className='flex flex-col gap-4 border px-6 py-6 text-sm text-[#767873]'>
-          <p>This classic corduroy overshirt in a deep forest green combines rugged durability with a soft, velvety texture.
-            It features a relaxed fit and dual chest pockets with matte tortoiseshell buttons, making it perfect for layering during transitional weather. 
-            The fine-wale fabric provides a subtle vintage aesthetic while ensuring the garment remains breathable and comfortable for all-day wear.
-          </p>
-          <p>Made in Israel</p>
+        <div className='flex flex-col gap-4 border px-6 py-6 text-sm text-[#8C8C8C] leading-relaxed'>
+          <p>{productData.description}</p>
         </div>
       </div>
 
-      {/* Display Related Products */}
+      {/* Related Products */}
       <RelatedProducts category={productData.category} subCategory={productData.subCategory} />
-      
+
     </div>
   ) : <div className='opacity-0'></div>
 }

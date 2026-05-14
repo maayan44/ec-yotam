@@ -51,7 +51,7 @@ const List = ({ token }) => {
           <b>שם</b>
           <b>קטגוריה</b>
           <b>מחיר</b>
-          <b className='text-center'>פעולה</b>
+          <b className='text-center'>מחק</b>
         </div>
 
         {/* Product List */}

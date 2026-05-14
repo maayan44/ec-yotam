@@ -13,7 +13,6 @@ const Cart = () => {
   useEffect(() => {
     if (products.length > 0) {
       const tempData = [];
-
       for (const items in cartItems) {
         for (const item in cartItems[items]) {
           if (cartItems[items][item] > 0) {
@@ -30,73 +29,64 @@ const Cart = () => {
   }, [cartItems, products])
 
   return (
-    <div className='border-t pt-14 '>
+    <div className='border-t pt-14'>
 
-      {/* Header Section */}
+      {/* Header */}
       <div className='text-2xl mb-3'>
-        <Title text1={'YOUR'} text2={'CART'} />
+        <Title text1={'סל'} text2={'הקניות'} />
       </div>
 
       {/* Cart Items List */}
       <div>
-        {
-          cartData.map((item, index) => {
+        {cartData.map((item, index) => {
+          const productData = products.find((product) => product._id === item._id);
+          if (!productData) return null;
 
-            const productData = products.find((product) => product._id === item._id);
+          return (
+            <div key={index} className='py-4 border-t border-b text-[#535551] grid grid-cols-[4fr_0.5fr_0.5fr] sm:grid-cols-[4fr_2fr_0.5fr] items-center gap-4'>
 
-            if (!productData) return null;
-
-            return (
-              <div key={index} className='py-4 border-t border-b text-[#535551] grid grid-cols-[4fr_0.5fr_0.5fr] sm:grid-cols-[4fr_2fr_0.5fr] items-center gap-4'>
-
-                {/* Product Info & Image */}
-                <div className='flex items-start gap-6'>
-                  <img className='w-16 sm:w-20' src={productData.image[0]} alt="" />
-                  <div>
-                    <p className='text-xs sm:text-lg font-medium'>{productData.name}</p>
-                    <div className=' flex items-center gap-5 mt-2'>
-                      <p>{currency}{productData.price}</p>
-                      <p className='px-2 sm:px-3 sm:py-1 border bg-slate-50'>{item.size}</p>
-                    </div>
+              <div className='flex items-start gap-6'>
+                <img className='w-16 sm:w-20' src={productData.image[0]} alt="" />
+                <div>
+                  <p className='text-xs sm:text-lg font-medium'>{productData.name}</p>
+                  <div className='flex items-center gap-5 mt-2'>
+                    <p className='text-[#C0001A] font-medium'>{currency}{productData.price}</p>
                   </div>
                 </div>
-
-                {/* Quantity Input */}
-                <input
-                  onChange={(e) => e.target.value === '' || e.target.value === '0' ? null : updateQuantity(item._id, item.size, Number(e.target.value))}
-                  className='border max-w-10 sm:max-w-20 px-1 sm:px-2 py-1'
-                  type="number"
-                  min={1} value={item.quantity}
-                />
-
-                {/* Remove Icon */}
-                <img
-                  onClick={() => updateQuantity(item._id, item.size, 0)}
-                  className='w-4 mr-4 sm:w-5 cursor-pointer'
-                  src={assets.bin_icon} alt=""
-                />
-
               </div>
-            )
-          })
-        }
+
+              <input
+                onChange={(e) => e.target.value === '' || e.target.value === '0' ? null : updateQuantity(item._id, item.size, Number(e.target.value))}
+                className='border max-w-10 sm:max-w-20 px-1 sm:px-2 py-1'
+                type="number"
+                min={1}
+                value={item.quantity}
+              />
+
+              <img
+                onClick={() => updateQuantity(item._id, item.size, 0)}
+                className='w-4 mr-4 sm:w-5 cursor-pointer'
+                src={assets.bin_icon}
+                alt=""
+              />
+
+            </div>
+          )
+        })}
       </div>
 
-      {/* Cart Footer & Checkout Button */}
-      <div className='flex justify-end my-20'>
+      {/* Cart Footer */}
+      <div className='flex justify-start my-20'>
         <div className='w-full sm:w-[450px]'>
-
           <CartTotal />
-
-          <div className='w-full text-end'>
+          <div className='w-full text-start mt-4'>
             <button
               onClick={() => navigate('/place-order')}
-              className='bg-black text-white text-sm my-8 px-8 py-3 cursor-pointer'
+              className='bg-[#1A1A1A] text-white text-sm px-8 py-3 cursor-pointer hover:bg-[#C0001A] transition-colors rounded'
             >
-              PROCEED TO CHECKOUT
+              המשך לתשלום
             </button>
           </div>
-
         </div>
       </div>
 
