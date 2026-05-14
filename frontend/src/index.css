@@ -18,7 +18,13 @@ body {
     direction: rtl;
 }
 
-h1, h2, h3, h4, h5, h6, .font-heading {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.font-heading {
     font-family: 'Heebo', 'Barlow Condensed', sans-serif;
     font-weight: 800;
     letter-spacing: 0.01em;
@@ -26,6 +32,21 @@ h1, h2, h3, h4, h5, h6, .font-heading {
 
 ::-webkit-scrollbar {
     display: none;
+}
+
+@keyframes marquee {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+.animate-marquee {
+    animation: marquee 18s linear infinite;
+    width: max-content;
 }
 
 @media (max-width: 640px) {

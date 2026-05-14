@@ -7,15 +7,13 @@ const Footer = () => {
 
       <div className='flex flex-col sm:grid grid-cols-[3fr_1fr_1fr] gap-14 px-8 py-14 text-sm'>
 
-        {/* Brand column */}
         <div>
-          <img src={assets.logo} className='mb-5 w-30' alt="YGarage" />
+          <img src={assets.logo} className='mb-5 w-30' alt="Interproduct" />
           <p className='w-full md:w-2/3 text-white/50 leading-relaxed'>
             INTERPRODUCT מספקת מוצרי טיפוח לרכב ואביזרי רכב מקצועיים. משלוח מהיר לכל הארץ, מחירים תחרותיים ושירות אמין.
           </p>
         </div>
 
-        {/* Company links */}
         <div>
           <p className='text-base font-semibold mb-5 text-white'>החברה</p>
           <ul className='flex flex-col gap-3 text-white/50'>
@@ -26,12 +24,16 @@ const Footer = () => {
           </ul>
         </div>
 
-        {/* Contact */}
         <div>
           <p className='text-base font-semibold mb-5 text-white'>צור קשר</p>
           <ul className='flex flex-col gap-3 text-white/50'>
-            <li className='hover:text-white transition-colors cursor-pointer'>053-594-4674</li>
-            <li className='hover:text-white transition-colors cursor-pointer'>interproduct95@gmail.com</li>
+            <li>
+              <a href='https://wa.me/+972535944674' target='_blank' rel='noopener noreferrer' className='flex items-center gap-2 hover:text-white transition-colors'>
+                <img src={assets.whatsapp_icon} alt='WhatsApp' className='w-5 h-5 object-contain' />
+                <span>053-594-4674</span>
+              </a>
+            </li>
+            <li>interproduct95@gmail.com</li>
           </ul>
         </div>
 

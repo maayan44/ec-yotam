@@ -3,9 +3,11 @@ import { assets } from '../assets/assets'
 
 const Navbar = ({ setToken }) => {
   return (
-    <div className='flex items-center py-2 px-[4%] justify-between'>
-      <img className='w-[max(10%m 80px)]' src={assets.logo} alt="" />
-      <button onClick={() => setToken('')} className='bg-[#767873] text-white cursor-pointer px-5 py-2 sm:px-7 sm:py-2 rounded-full text-xs sm:text-sm'>Logout</button>
+    <div className='flex items-center py-3 px-[4%] justify-between bg-[#1A1A1A]'>
+      <img className='h-10 w-auto' src={assets.logo} alt="" />
+      <button onClick={() => setToken('')} className='bg-[#C0001A] text-white cursor-pointer px-5 py-2 rounded-full text-xs sm:text-sm hover:bg-[#a00016] transition-colors'>
+        התנתק
+      </button>
     </div>
   )
 }

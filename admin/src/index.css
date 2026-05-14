@@ -1,27 +1,21 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700;800&family=Barlow+Condensed:wght@600;700;800&display=swap');
 @import "tailwindcss";
 
-    {
-    /* Colors Set: 
-    Main: #00000 and #ffffff
-    Capsule: #767873 and #e9e0d7
-    Equivalent: gray-700 -> [#535551], gray-600 -> [#646661], gray500 -> [#767873], gray-400 -> [#A3A5A1]
-    Equivalent: gray-300 -> [#C6C7C3], gray-200 -> [#D9DAD6], gray100 -> [#EBECE8], gray-50 -> [#F5F6F2] */
-}
-
 * {
-    font-family: Outfit;
+    font-family: 'Heebo', sans-serif;
+    direction: rtl;
 }
 
 select,
 input,
 textarea {
-    border: 1px solid #C6C7C3;
-    outline-color: #767873;
+    border: 1px solid #3D3D3D;
+    outline-color: #C0001A;
     border-radius: 4px;
 }
 
 .active {
-    background-color: #767873;
-    border-color: #767873;
+    background-color: #C0001A;
+    border-color: #C0001A;
+    color: white;
 }
