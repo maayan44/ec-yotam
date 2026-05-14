@@ -15,7 +15,7 @@ const Navbar = () => {
     }
 
     return (
-        <div className='flex items-center justify-between py-4 px-8 font-medium bg-[#1A1A1A]'>
+        <div className='sticky top-0 z-50 border-b border-white/10 flex items-center justify-between py-4 px-8 font-medium bg-[#1A1A1A]'>
 
             <Link to={'/'}>
                 <img src={assets.logo} className='w-34' alt="YGarage" />
