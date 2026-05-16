@@ -11,7 +11,7 @@ const Footer = () => {
         <div>
           <img src={assets.logo} className='mb-5 w-30' alt="Interproduct" />
           <p className='w-full md:w-2/3 text-white/50 leading-relaxed'>
-            INTERPRODUCT מספקת מוצרי טיפוח לרכב ואביזרי רכב מקצועיים. משלוח מהיר לכל הארץ, מחירים תחרותיים ושירות אמין.
+            INTERPRODUCT מספקת מוצרי טיפוח לרכב ואביזרי רכב מקצועיים. <br></br>משלוח מהיר לכל הארץ, מחירים תחרותיים ושירות אמין.
           </p>
         </div>
 
