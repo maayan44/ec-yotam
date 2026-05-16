@@ -15,10 +15,12 @@ import SearchBar from './components/SearchBar'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import PromoBanner from './components/PromoBanner'
+import ScrollToTop from './components/ScrollToTop'
 
 const App = () => {
   return (
   <div>
+    <ScrollToTop />
     <PromoBanner />
     <Navbar />
     <SearchBar />

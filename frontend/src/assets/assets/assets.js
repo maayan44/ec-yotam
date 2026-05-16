@@ -18,6 +18,7 @@ import vacuum_icon from './vacuum_icon.png'
 import smell_icon from './smell_icon.png'
 import cleaning_icon from './cleaning_icon.png'
 import parts_icon from './parts_icon.png'
+import vid1_poster from './vid1_poster.jpg'
 
 export const assets = {
     logo,
@@ -40,6 +41,7 @@ export const assets = {
     smell_icon,
     cleaning_icon,
     parts_icon,
+    vid1_poster,
 }
 
 export const products = [

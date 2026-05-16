@@ -1,15 +1,15 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import { ShopContext } from '../context/ShopContext';
-import { assets } from '../assets/assets/assets';
 import RelatedProducts from '../components/RelatedProducts';
 
 const Product = () => {
 
   const { productId } = useParams();
-  const { products, currency, addToCart } = useContext(ShopContext);
+  const { products, formatPrice, addToCart } = useContext(ShopContext);
   const [productData, setProductData] = useState(false);
   const [image, setImage] = useState('')
+  const navigate = useNavigate();
 
   const fetchProductData = async () => {
     products.map((item) => {
@@ -27,6 +27,15 @@ const Product = () => {
 
   return productData ? (
     <div className='border-t-2 pt-10 transition-opacity ease-in duration-500 opacity-100'>
+
+      {/* Back button */}
+      <button
+        onClick={() => navigate('/collection')}
+        className='mb-6 flex items-center gap-2 text-sm text-[#8C8C8C] hover:text-[#C0001A] transition-colors'
+      >
+        <span>←</span>
+        <span>חזרה לקטלוג</span>
+      </button>
 
       {/* Product Data */}
       <div className='flex gap-12 flex-col sm:flex-row'>
@@ -52,8 +61,7 @@ const Product = () => {
         {/* Product Info */}
         <div className='flex-1'>
           <h1 className='font-medium text-2xl mt-2'>{productData.name}</h1>
-
-          <p className='mt-5 text-3xl font-medium text-[#C0001A]'>{currency}{productData.price}</p>
+          <p className='mt-5 text-3xl font-medium text-[#C0001A]'>{formatPrice(productData.price)}</p>
           <p className='mt-5 text-[#8C8C8C] md:w-4/5 leading-relaxed'>{productData.description}</p>
 
           <button

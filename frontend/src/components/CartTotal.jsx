@@ -4,7 +4,7 @@ import Title from '../components/Title'
 
 const CartTotal = () => {
 
-    const { currency, delivery_fee, getCartAmount } = useContext(ShopContext);
+    const { formatPrice, delivery_fee, getCartAmount } = useContext(ShopContext);
 
   return (
     <div className='w-full'>
@@ -15,17 +15,17 @@ const CartTotal = () => {
         <div className='flex flex-col gap-2 mt-2 text-sm'>
             <div className='flex justify-between'>
                 <p>סכום ביניים</p>
-                <p>{currency}{getCartAmount()}.00</p>
+                <p>{formatPrice(getCartAmount())}</p>
             </div>
             <hr className='border-[#F5F5F0]' />
             <div className='flex justify-between'>
                 <p>דמי משלוח</p>
-                <p>{currency}{delivery_fee}.00</p>
+                <p>{formatPrice(delivery_fee)}</p>
             </div>
             <hr className='border-[#F5F5F0]' />
             <div className='flex justify-between'>
                 <b>סה"כ לתשלום</b>
-                <b className='text-[#C0001A]'>{currency}{getCartAmount() === 0 ? 0 : getCartAmount() + delivery_fee}.00</b>
+                <b className='text-[#C0001A]'>{formatPrice(getCartAmount() === 0 ? 0 : getCartAmount() + delivery_fee)}</b>
             </div>
         </div>
     </div>

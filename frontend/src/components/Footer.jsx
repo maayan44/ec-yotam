@@ -19,10 +19,10 @@ const Footer = () => {
           <p className='text-base font-semibold mb-5 text-white'>החברה</p>
           <ul className='flex flex-col gap-3 text-white/50'>
             <li>
-              <Link to='/' onClick={() => window.scrollTo(0, 0)} className='hover:text-[#C0001A] transition-colors'>בית</Link>
+              <Link to='/' className='hover:text-[#C0001A] transition-colors'>בית</Link>
             </li>
             <li>
-              <Link to='/about' onClick={() => window.scrollTo(0, 0)} className='hover:text-[#C0001A] transition-colors'>אודות</Link>
+              <Link to='/about' className='hover:text-[#C0001A] transition-colors'>אודות</Link>
             </li>
             <li className='hover:text-[#C0001A] cursor-pointer transition-colors'>מדיניות פרטיות</li>
           </ul>

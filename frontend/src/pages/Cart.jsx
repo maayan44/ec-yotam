@@ -6,7 +6,7 @@ import CartTotal from '../components/CartTotal';
 
 const Cart = () => {
 
-  const { products, currency, cartItems, updateQuantity, navigate } = useContext(ShopContext);
+  const { products, formatPrice, cartItems, updateQuantity, navigate } = useContext(ShopContext);
 
   const [cartData, setCartData] = useState([]);
 
@@ -31,12 +31,10 @@ const Cart = () => {
   return (
     <div className='border-t pt-14'>
 
-      {/* Header */}
       <div className='text-2xl mb-3'>
         <Title text1={'סל'} text2={'הקניות'} />
       </div>
 
-      {/* Cart Items List */}
       <div>
         {cartData.map((item, index) => {
           const productData = products.find((product) => product._id === item._id);
@@ -50,7 +48,7 @@ const Cart = () => {
                 <div>
                   <p className='text-xs sm:text-lg font-medium'>{productData.name}</p>
                   <div className='flex items-center gap-5 mt-2'>
-                    <p className='text-[#C0001A] font-medium'>{currency}{productData.price}</p>
+                    <p className='text-[#C0001A] font-medium'>{formatPrice(productData.price)}</p>
                   </div>
                 </div>
               </div>
@@ -75,7 +73,6 @@ const Cart = () => {
         })}
       </div>
 
-      {/* Cart Footer */}
       <div className='flex justify-start my-20'>
         <div className='w-full sm:w-[450px]'>
           <CartTotal />
