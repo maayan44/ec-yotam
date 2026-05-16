@@ -26,19 +26,24 @@ const Categories = () => {
         </p>
       </div>
 
-      <div className='grid grid-cols-2 sm:grid-cols-4 gap-6'>
+      <div className='flex justify-center gap-10'>
         {categories.map((cat, i) => (
           <div
             key={i}
             onClick={() => handleClick(cat.value)}
-            className='flex flex-col items-center justify-center gap-4 py-10 px-6 border border-[#F5F5F0] rounded-lg cursor-pointer hover:border-[#C0001A] hover:shadow-md transition-all group'
+            className='flex flex-col items-center justify-center gap-3 cursor-pointer group'
           >
-            <img
-              src={cat.icon}
-              alt={cat.name}
-              className='w-16 h-16 object-contain group-hover:scale-110 transition-transform'
-            />
-            <p className='font-semibold text-[#1A1A1A] text-sm'>{cat.name}</p>
+            {/* Circle with thin red border — always visible */}
+            <div className='w-36 h-36 rounded-full border border-[#C0001A]/30 group-hover:border-[#C0001A]/60 transition-all duration-300 flex items-center justify-center bg-white'>
+              <img
+                src={cat.icon}
+                alt={cat.name}
+                className='w-20 h-20 object-contain'
+              />
+            </div>
+            <p className='font-semibold text-[#1A1A1A] text-sm text-center'>
+              {cat.name}
+            </p>
           </div>
         ))}
       </div>
