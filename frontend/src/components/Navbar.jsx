@@ -9,7 +9,7 @@ const Navbar = () => {
     const { search, setSearch, showSearch, setShowSearch, getCartCount, navigate, token, setToken, setCartItems } = useContext(ShopContext);
 
     useEffect(() => {
-        const handleScroll = () => setScrolled(window.scrollY > 60);
+        const handleScroll = () => setScrolled(window.scrollY > 40);
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
