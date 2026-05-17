@@ -53,7 +53,7 @@ const userOrders = async (req, res) => {
     try {
         const { userId } = req.body
         const orders = await orderModel.find({ userId })
-        response.json({ success: true, orders })
+        res.json({ success: true, orders })
 
     } catch (error) {
         console.log(error)

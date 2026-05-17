@@ -14,7 +14,7 @@ const Contact = () => {
         
         <div className='flex flex-col justify-center items-start gap-6'>
           <p className='font-semibold text-xl text-[#1A1A1A]'>אינטרפרודקט</p>
-          <p className='text-[#8C8C8C]'>רחוב הירקון 44 <br /> תל אביב-יפו, ישראל</p>
+          <p className='text-[#8C8C8C]'>מצפה אבי"ב, ישראל</p>
           <p className='text-[#8C8C8C]'>
             טלפון:{' '}
             <a href='https://wa.me/+972535944674' target='_blank' rel='noopener noreferrer' className='hover:text-[#C0001A] transition-colors'>

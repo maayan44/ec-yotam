@@ -9,9 +9,15 @@ a.active hr {
    Primary:   #C0001A (Engine Red)
    Dark:      #1A1A1A (Garage Black)
    Cards:     #F5F5F0 (Workshop White)
-   Muted:     #8C8C8C (Steel Gray)
-   Capsule:   #767873 and #e9e0d7
-   gray-700 -> [#535551], gray-600 -> [#646661], gray-500 -> [#767873], gray-400 -> [#A3A5A1] */
+   Muted:     #8C8C8C (Steel Gray) */
+
+html,
+body,
+#root {
+    width: 100%;
+    max-width: 100vw;
+    overflow-x: hidden;
+}
 
 body {
     font-family: 'Heebo', 'Barlow', sans-serif;
@@ -32,6 +38,15 @@ h6,
 
 ::-webkit-scrollbar {
     display: none;
+}
+
+@keyframes bannerScroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-25%);
+    }
 }
 
 @media (max-width: 640px) {

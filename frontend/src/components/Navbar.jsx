@@ -122,16 +122,16 @@ const Navbar = () => {
             </div>
 
             {/* Mobile sidebar */}
-            <div className={`absolute top-0 right-0 bottom-0 overflow-hidden bg-[#1A1A1A] transition-all z-50 ${visible ? 'w-full' : 'w-0'}`}>
-                <div className='flex flex-col text-white/70'>
-                    <div onClick={() => setVisible(false)} className='flex items-center gap-4 p-3 cursor-pointer'>
+            <div className={`fixed top-0 right-0 bottom-0 overflow-hidden bg-[#1A1A1A] transition-all duration-300 z-50 ${visible ? 'w-full' : 'w-0'}`}>
+                <div className='flex flex-col text-white/70 min-h-screen'>
+                    <div onClick={() => setVisible(false)} className='flex items-center gap-4 p-5 cursor-pointer border-b border-white/10'>
                         <img className='h-4' src={assets.dropdown_icon} alt="" />
                         <p className='text-sm'>חזרה</p>
                     </div>
-                    <NavLink onClick={() => setVisible(false)} className='py-3 pr-6 border-b border-white/10 hover:text-white' to='/'>בית</NavLink>
-                    <NavLink onClick={() => setVisible(false)} className='py-3 pr-6 border-b border-white/10 hover:text-white' to='/collection'>קטלוג</NavLink>
-                    <NavLink onClick={() => setVisible(false)} className='py-3 pr-6 border-b border-white/10 hover:text-white' to='/about'>אודות</NavLink>
-                    <NavLink onClick={() => setVisible(false)} className='py-3 pr-6 border-b border-white/10 hover:text-white' to='/contact'>צור קשר</NavLink>
+                    <NavLink onClick={() => setVisible(false)} className='py-4 pr-8 border-b border-white/10 hover:text-white text-lg' to='/'>בית</NavLink>
+                    <NavLink onClick={() => setVisible(false)} className='py-4 pr-8 border-b border-white/10 hover:text-white text-lg' to='/collection'>קטלוג</NavLink>
+                    <NavLink onClick={() => setVisible(false)} className='py-4 pr-8 border-b border-white/10 hover:text-white text-lg' to='/about'>אודות</NavLink>
+                    <NavLink onClick={() => setVisible(false)} className='py-4 pr-8 border-b border-white/10 hover:text-white text-lg' to='/contact'>צור קשר</NavLink>
                 </div>
             </div>
 

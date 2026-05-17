@@ -4,21 +4,25 @@ import { Link } from 'react-router-dom'
 
 const Hero = () => {
   return (
-    <div className='flex flex-col sm:flex-row border border-[#1A1A1A]'>
+    <div className='flex flex-col sm:flex-row border border-[#1A1A1A] -mx-4 sm:mx-0'>
 
-      {/* Hero Right Side - Image (comes first in RTL) */}
-      <img className='w-full sm:w-1/2 object-cover' src={assets.hero_img} alt="מוצרי גראז'" />
+      {/* Image — full width on mobile, half on desktop */}
+      <img
+        className='w-full sm:w-1/2 object-cover max-h-[300px] sm:max-h-none'
+        src={assets.hero_img}
+        alt="מוצרי גראז'"
+      />
 
-      {/* Hero Left Side - Text */}
-      <div className='w-full sm:w-1/2 flex items-center justify-center py-10 sm:py-0 bg-[#1A1A1A]'>
-        <div className='text-white px-8'>
+      {/* Text panel */}
+      <div className='w-full sm:w-1/2 flex items-center justify-center py-10 bg-[#1A1A1A]'>
+        <div className='text-white px-6 sm:px-8'>
 
           <div className='flex items-center gap-2'>
             <p className='w-8 md:w-11 h-[2px] bg-[#C0001A]'></p>
             <p className='font-medium text-sm md:text-base tracking-widest text-white/60'>הנמכרים ביותר</p>
           </div>
 
-          <h1 className='text-3xl sm:py-3 lg:text-5xl leading-relaxed font-bold'>
+          <h1 className='text-2xl sm:text-3xl lg:text-5xl py-3 leading-relaxed font-bold'>
             מוצרים חדשים
           </h1>
 

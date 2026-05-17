@@ -11,7 +11,6 @@ import PlaceOrder from './pages/PlaceOrder'
 import Orders from './pages/Orders'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
-import SearchBar from './components/SearchBar'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import PromoBanner from './components/PromoBanner'
@@ -19,26 +18,26 @@ import ScrollToTop from './components/ScrollToTop'
 
 const App = () => {
   return (
-  <div>
-    <ScrollToTop />
-    <PromoBanner />
-    <Navbar />
-    <div className='px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw]'>
-      <Routes>
-        <Route path='/' element={<Home/>} />
-        <Route path='/collection' element={<Archive/>} />
-        <Route path='/about' element={<About/>} />
-        <Route path='/contact' element={<Contact/>} />
-        <Route path='/product/:productId' element={<Product/>} />
-        <Route path='/cart' element={<Cart/>} />
-        <Route path='/login' element={<Login/>} />
-        <Route path='/place-order' element={<PlaceOrder/>} />
-        <Route path='/orders' element={<Orders/>} />
-      </Routes>
+    <div className='w-full min-h-screen'>
+      <ScrollToTop />
+      <PromoBanner />
+      <Navbar />
+      <div className='px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw] overflow-hidden'>
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='/collection' element={<Archive />} />
+          <Route path='/about' element={<About />} />
+          <Route path='/contact' element={<Contact />} />
+          <Route path='/product/:productId' element={<Product />} />
+          <Route path='/cart' element={<Cart />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/place-order' element={<PlaceOrder />} />
+          <Route path='/orders' element={<Orders />} />
+        </Routes>
+      </div>
+      <Footer />
     </div>
-    <Footer/>
-  </div>
-)
+  )
 }
 
 export default App

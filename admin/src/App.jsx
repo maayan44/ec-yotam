@@ -30,7 +30,7 @@ const App = () => {
           <hr className="border-none h-[1px] bg-[#3D3D3D]" />
           <div className='flex w-full'>
             <Sidebar />
-            <div className='w-[70%] mx-auto ml-[max(5vw,25px)] my-8 text-[#1A1A1A] text-balance text-base'>
+            <div className='flex-1 p-4 my-8 text-[#1A1A1A] text-base overflow-x-hidden'>
               <Routes>
                 <Route path='/add' element={<Add token={token} />} />
                 <Route path='/list' element={<List token={token} />} />
