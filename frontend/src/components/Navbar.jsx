@@ -6,7 +6,7 @@ import { ShopContext } from '../context/ShopContext.jsx';
 const Navbar = () => {
     const [visible, setVisible] = useState(false);
     const [scrolled, setScrolled] = useState(false);
-    const { setShowSearch, getCartCount, navigate, token, setToken, setCartItems } = useContext(ShopContext);
+    const { search, setSearch, showSearch, setShowSearch, getCartCount, navigate, token, setToken, setCartItems } = useContext(ShopContext);
 
     useEffect(() => {
         const handleScroll = () => setScrolled(window.scrollY > 60);
@@ -65,15 +65,46 @@ const Navbar = () => {
             </ul>
 
             {/* Icons */}
-            <div className='flex items-center gap-6'>
-                <img onClick={() => setShowSearch(true)} src={assets.search_icon} className='w-5 cursor-pointer invert' alt="חיפוש" />
+            <div className='flex items-center gap-4'>
+
+                {/* Inline search */}
+                <div className='flex items-center gap-2'>
+                    {showSearch && (
+                        <div className='flex items-center border border-white/20 rounded-full px-3 py-1 bg-[#2a2a2a]'>
+                            <input
+                                autoFocus
+                                value={search}
+                                onChange={(e) => {
+                                    setSearch(e.target.value)
+                                    if (!window.location.pathname.includes('collection')) {
+                                        navigate('/collection')
+                                    }
+                                }}
+                                className='outline-none bg-transparent text-white text-sm w-36 placeholder-white/40'
+                                type="text"
+                                placeholder='חיפוש...'
+                            />
+                            <img
+                                onClick={() => { setShowSearch(false); setSearch('') }}
+                                className='w-3 cursor-pointer invert mr-2'
+                                src={assets.cross_icon}
+                                alt=""
+                            />
+                        </div>
+                    )}
+                    <img
+                        onClick={() => setShowSearch(!showSearch)}
+                        src={assets.search_icon}
+                        className='w-5 cursor-pointer invert'
+                        alt="חיפוש"
+                    />
+                </div>
 
                 <div className='group relative'>
                     <img onClick={() => token ? null : navigate('/login')} className='w-5 cursor-pointer invert' src={assets.profile_icon} alt="פרופיל" />
                     {token &&
                         <div className='group-hover:block hidden absolute dropdown-menu left-0 pt-4 z-50'>
                             <div className='flex flex-col gap-2 w-36 py-3 px-5 bg-[#2a2a2a] text-white/70 rounded text-sm'>
-                                <p className='cursor-pointer hover:text-white'>הפרופיל שלי</p>
                                 <p onClick={() => navigate('/orders')} className='cursor-pointer hover:text-white'>ההזמנות שלי</p>
                                 <p onClick={logout} className='cursor-pointer hover:text-white'>התנתק</p>
                             </div>
