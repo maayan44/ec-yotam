@@ -1,15 +1,15 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { useParams, useNavigate } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { ShopContext } from '../context/ShopContext';
+import { toast } from 'react-toastify';
 import RelatedProducts from '../components/RelatedProducts';
 
 const Product = () => {
 
   const { productId } = useParams();
-  const { products, formatPrice, addToCart } = useContext(ShopContext);
+  const { products, formatPrice, addToCart, token, navigate } = useContext(ShopContext);
   const [productData, setProductData] = useState(false);
   const [image, setImage] = useState('')
-  const navigate = useNavigate();
 
   const fetchProductData = async () => {
     products.map((item) => {
@@ -28,7 +28,6 @@ const Product = () => {
   return productData ? (
     <div className='border-t-2 pt-10 transition-opacity ease-in duration-500 opacity-100'>
 
-      {/* Back button */}
       <button
         onClick={() => navigate('/collection')}
         className='mb-6 flex items-center gap-2 text-sm text-[#8C8C8C] hover:text-[#C0001A] transition-colors'
@@ -37,10 +36,8 @@ const Product = () => {
         <span>חזרה לקטלוג</span>
       </button>
 
-      {/* Product Data */}
       <div className='flex gap-12 flex-col sm:flex-row'>
 
-        {/* Product Images */}
         <div className='flex-1 flex flex-col-reverse gap-3 sm:flex-row'>
           <div className='flex sm:flex-col overflow-x-auto sm:overflow-y-scroll justify-between sm:justify-normal sm:w-[18.7%] w-full'>
             {productData.image.map((item, index) => (
@@ -58,14 +55,20 @@ const Product = () => {
           </div>
         </div>
 
-        {/* Product Info */}
         <div className='flex-1'>
           <h1 className='font-medium text-2xl mt-2'>{productData.name}</h1>
           <p className='mt-5 text-3xl font-medium text-[#C0001A]'>{formatPrice(productData.price)}</p>
           <p className='mt-5 text-[#8C8C8C] md:w-4/5 leading-relaxed'>{productData.description}</p>
 
           <button
-            onClick={() => addToCart(productData._id, 'default')}
+            onClick={() => {
+              if (!token) {
+                toast.error('יש להתחבר כדי להוסיף מוצרים לסל')
+                navigate('/login')
+                return
+              }
+              addToCart(productData._id, 'default')
+            }}
             className='mt-8 bg-[#1A1A1A] text-white px-8 py-3 text-sm hover:bg-[#C0001A] transition-colors cursor-pointer rounded'
           >
             הוסף לסל
@@ -81,7 +84,6 @@ const Product = () => {
         </div>
       </div>
 
-      {/* Description Section */}
       <div className='mt-20'>
         <div className='flex'>
           <b className='border px-5 py-3 text-sm bg-[#1A1A1A] text-white'>תיאור המוצר</b>
@@ -91,7 +93,6 @@ const Product = () => {
         </div>
       </div>
 
-      {/* Related Products */}
       <RelatedProducts category={productData.category} subCategory={productData.subCategory} />
 
     </div>

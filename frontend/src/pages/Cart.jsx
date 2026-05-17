@@ -3,10 +3,11 @@ import { ShopContext } from '../context/ShopContext'
 import Title from '../components/Title'
 import { assets } from '../assets/assets/assets';
 import CartTotal from '../components/CartTotal';
+import { toast } from 'react-toastify'
 
 const Cart = () => {
 
-  const { products, formatPrice, cartItems, updateQuantity, navigate } = useContext(ShopContext);
+  const { products, formatPrice, cartItems, updateQuantity, navigate, token } = useContext(ShopContext);
 
   const [cartData, setCartData] = useState([]);
 
@@ -78,7 +79,14 @@ const Cart = () => {
           <CartTotal />
           <div className='w-full text-start mt-4'>
             <button
-              onClick={() => navigate('/place-order')}
+              onClick={() => {
+                if (!token) {
+                  toast.error('יש להתחבר כדי להמשיך לתשלום')
+                  navigate('/login')
+                  return
+                }
+                navigate('/place-order')
+              }}
               className='bg-[#1A1A1A] text-white text-sm px-8 py-3 cursor-pointer hover:bg-[#C0001A] transition-colors rounded'
             >
               המשך לתשלום

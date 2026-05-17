@@ -19,8 +19,9 @@ const ShopContextProvider = (props) => {
     const navigate = useNavigate();
 
     const addToCart = async (itemId, size) => {
-        if (!size) {
-            toast.error('Select Product Size')
+        if (!token) {
+            toast.error('יש להתחבר כדי להוסיף מוצרים לסל')
+            navigate('/login')
             return;
         }
 
@@ -38,14 +39,11 @@ const ShopContextProvider = (props) => {
         }
         setCartItems(cartData);
 
-        if (token) {
-            try {
-                await axios.post(backendUrl + '/api/cart/add', { itemId, size }, { headers: { token } })
-
-            } catch (error) {
-                console.log(error)
-                toast.error(error.message)
-            }
+        try {
+            await axios.post(backendUrl + '/api/cart/add', { itemId, size }, { headers: { token } })
+        } catch (error) {
+            console.log(error)
+            toast.error(error.message)
         }
     }
 
