@@ -11,7 +11,10 @@ a.active hr {
    Cards:     #F5F5F0 (Workshop White)
    Muted:     #8C8C8C (Steel Gray) */
 
-html,
+html {
+    width: 100%;
+}
+
 body,
 #root {
     width: 100%;
@@ -45,7 +48,7 @@ h6,
         transform: translateX(0);
     }
     100% {
-        transform: translateX(-25%);
+        transform: translateX(-25%); 
     }
 }
 

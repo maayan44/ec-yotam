@@ -22,7 +22,7 @@ const Navbar = () => {
     }
 
     return (
-        <div className={`sticky top-0 z-50 border-b border-white/10 flex items-center justify-between px-8 font-medium bg-[#1A1A1A] transition-all duration-300 ${scrolled ? 'py-2' : 'py-4'}`}>
+        <div className={`fixed top-[33px] left-0 right-0 z-50 border-b border-white/10 flex items-center justify-between px-8 font-medium bg-[#1A1A1A] transition-all duration-300 ${scrolled ? 'py-2' : 'py-4'}`}>
 
             <Link to={'/'}>
                 <img src={assets.logo} className={`transition-all duration-300 ${scrolled ? 'w-24' : 'w-34'}`} alt="Interproduct" />

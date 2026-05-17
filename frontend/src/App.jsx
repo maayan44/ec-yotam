@@ -22,7 +22,7 @@ const App = () => {
       <ScrollToTop />
       <PromoBanner />
       <Navbar />
-      <div className='px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw] overflow-hidden'>
+      <div className='px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw] pt-[140px]'>
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/collection' element={<Archive />} />

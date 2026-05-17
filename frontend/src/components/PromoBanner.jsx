@@ -3,10 +3,7 @@ import { Link } from 'react-router-dom'
 
 const PromoBanner = () => {
   return (
-    <div 
-      className='w-full bg-[#C0001A] text-white py-2 overflow-hidden'
-      style={{ direction: 'ltr' }}
-    >
+    <div className='fixed top-0 left-0 right-0 z-[60] w-full bg-[#C0001A] text-white py-2 overflow-hidden' style={{direction: 'ltr'}}>
       <div style={{
         display: 'flex',
         width: 'max-content',
