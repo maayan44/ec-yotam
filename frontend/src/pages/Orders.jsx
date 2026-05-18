@@ -26,7 +26,7 @@ const Orders = () => {
 
   const translateStatus = (status) => {
     const map = {
-      'Order placed': 'הזמנה התקבלה',
+      'Order Placed': 'הזמנה התקבלה',
       'Delivery Scheduled': 'נקבע מועד למשלוח',
       'Delivered': 'נמסר',
     }

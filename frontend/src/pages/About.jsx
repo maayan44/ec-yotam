@@ -1,6 +1,5 @@
 import React from 'react'
 import Title from '../components/Title'
-import NewsletterBox from '../components/NewsletterBox'
 import { assets } from '../assets/assets/assets.js';
 
 const About = () => {
@@ -63,8 +62,6 @@ const About = () => {
             We pride ourselves on providing a personalized experience that reflects the same care and attention to detail found in every garment we produce.</p>
         </div>
       </div>
-
-      <NewsletterBox />
 
     </div>
   )

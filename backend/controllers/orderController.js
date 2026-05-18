@@ -1,5 +1,6 @@
 import orderModel from "../models/orderModel.js";
 import userModel from "../models/userModel.js";
+import sendOrderEmail from "../utils/sendEmail.js";
 
 const placeOrder = async (req, res) => {
     try {
@@ -16,7 +17,12 @@ const placeOrder = async (req, res) => {
         const newOrder = new orderModel(orderData)
         await newOrder.save()
         await userModel.findByIdAndUpdate(userId, { cartData: {} })
-        res.json({ success: true, message: "order Placed" })
+
+        // Send email notification to admin
+        await sendOrderEmail({ items, amount, address })
+
+        res.json({ success: true, message: "ההזמנה התקבלה בהצלחה" })
+
     } catch (error) {
         console.log(error)
         res.json({ success: false, message: error.message })

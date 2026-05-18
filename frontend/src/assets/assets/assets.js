@@ -18,7 +18,7 @@ import smell_icon from './smell_icon.png'
 import cleaning_icon from './cleaning_icon.png'
 import parts_icon from './parts_icon.png'
 import vid1_poster from './vid1_poster.jpg'
-import brand_pro from './brand_pro.jfif'
+import brand_pro from './brand_pro.png'
 import brand_insta from './brand_insta.png'
 import brand_automagic from './brand_automagic.png'
 
