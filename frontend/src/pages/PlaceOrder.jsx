@@ -7,7 +7,6 @@ import { toast } from 'react-toastify'
 
 const PlaceOrder = () => {
 
-  const [method, setMethod] = useState('cod');
   const { navigate, backendUrl, token, cartItems, setCartItems, getCartAmount, delivery_fee, products } = useContext(ShopContext);
   const [formData, setFormData] = useState({
     firstName: '',
@@ -44,7 +43,9 @@ const PlaceOrder = () => {
       let orderData = {
         address: { ...formData, state: '', zipcode: '', country: 'ישראל' },
         items: orderItems,
-        amount: getCartAmount() + delivery_fee
+        amount: getCartAmount() + delivery_fee,
+        paymentMethod: 'cod',
+        payment: false
       }
 
       const response = await axios.post(backendUrl + '/api/order/place', orderData, { headers: { token } })
@@ -72,82 +73,39 @@ const PlaceOrder = () => {
         </div>
 
         <div className='flex gap-3'>
-          <input
-            required
-            onChange={onChangeHandler}
-            name='firstName'
-            value={formData.firstName}
-            className='border border-[#A3A5A1] rounded py-1.5 px-3.5 w-full'
-            type="text"
-            placeholder='שם פרטי'
-          />
-          <input
-            required
-            onChange={onChangeHandler}
-            name='lastName'
-            value={formData.lastName}
-            className='border border-[#A3A5A1] rounded py-1.5 px-3.5 w-full'
-            type="text"
-            placeholder='שם משפחה'
-          />
+          <input required onChange={onChangeHandler} name='firstName' value={formData.firstName}
+            className='border border-[#A3A5A1] rounded py-1.5 px-3.5 w-full' type="text" placeholder='שם פרטי' />
+          <input required onChange={onChangeHandler} name='lastName' value={formData.lastName}
+            className='border border-[#A3A5A1] rounded py-1.5 px-3.5 w-full' type="text" placeholder='שם משפחה' />
         </div>
 
-        <input
-          required
-          onChange={onChangeHandler}
-          name='email'
-          value={formData.email}
-          className='border border-[#A3A5A1] rounded py-1.5 px-3.5 w-full'
-          type="email"
-          placeholder='כתובת אימייל'
-        />
+        <input required onChange={onChangeHandler} name='email' value={formData.email}
+          className='border border-[#A3A5A1] rounded py-1.5 px-3.5 w-full' type="email" placeholder='כתובת אימייל' />
 
-        <input
-          required
-          onChange={onChangeHandler}
-          name='street'
-          value={formData.street}
-          className='border border-[#A3A5A1] rounded py-1.5 px-3.5 w-full'
-          type="text"
-          placeholder='רחוב ומספר עסק'
-        />
+        <input required onChange={onChangeHandler} name='street' value={formData.street}
+          className='border border-[#A3A5A1] rounded py-1.5 px-3.5 w-full' type="text" placeholder='רחוב ומספר עסק' />
 
-        <input
-          required
-          onChange={onChangeHandler}
-          name='city'
-          value={formData.city}
-          className='border border-[#A3A5A1] rounded py-1.5 px-3.5 w-full'
-          type="text"
-          placeholder='עיר'
-        />
+        <input required onChange={onChangeHandler} name='city' value={formData.city}
+          className='border border-[#A3A5A1] rounded py-1.5 px-3.5 w-full' type="text" placeholder='עיר' />
 
-        <input
-          required
-          onChange={onChangeHandler}
-          name='phone'
-          value={formData.phone}
-          className='border border-[#A3A5A1] rounded py-1.5 px-3.5 w-full'
-          type="number"
-          placeholder='מספר טלפון'
-        />
+        <input required onChange={onChangeHandler} name='phone' value={formData.phone}
+          className='border border-[#A3A5A1] rounded py-1.5 px-3.5 w-full' type="number" placeholder='מספר טלפון' />
       </div>
 
-      {/* Order Summary & Payment */}
+      {/* Order Summary */}
       <div className='mt-8'>
         <div className='mt-8 min-w-80'>
           <CartTotal />
         </div>
 
         <div className='mt-12'>
-          <Title text1={'אמצעי'} text2={'תשלום'} />
 
-          <div className='flex gap-3 flex-col lg:flex-row'>
-            <div onClick={() => setMethod('cod')} className='flex items-center gap-3 border p-2 px-3 cursor-pointer hover:border-[#C0001A] transition-colors'>
-              <p className={`min-w-3.5 h-3.5 border rounded-full ${method === 'cod' ? 'bg-[#C0001A]' : ''}`}></p>
-              <p className='text-[#1A1A1A] text-sm font-medium mx-4'>תשלום במזומן / בקבלה</p>
-            </div>
-          </div>
+          {/* Note instead of payment selector */}
+          <p className='text-xs text-[#8C8C8C] leading-relaxed border-r-2 border-[#C0001A] pr-3'>
+            לאחר קבלת ואישור ההזמנה,<br />
+            צוות אינטרפרודקט יצור עמך קשר דרך הטלפון<br />
+            לקביעת מועד משלוח ותשלום.
+          </p>
 
           <div className='w-full text-start mt-8'>
             <button
