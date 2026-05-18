@@ -8,8 +8,6 @@ import profile_icon from './profile_icon.png'
 import search_icon from './search_icon.png'
 import menu_icon from './menu_icon.png'
 import contact_img from './contact_img.png'
-import razorpay_logo from './razorpay_logo.png'
-import stripe_logo from './stripe_logo.png'
 import cross_icon from './cross_icon.png'
 import vid1 from './vid1.mp4'
 import whatsapp_icon from './whatsapp_icon.png'
@@ -32,8 +30,6 @@ export const assets = {
     bin_icon,
     menu_icon,
     contact_img,
-    razorpay_logo,
-    stripe_logo,
     cross_icon,
     vid1,
     x,

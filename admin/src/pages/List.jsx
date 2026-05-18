@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { backendUrl, currency } from '../App'
 import axios from 'axios'
 import { toast } from 'react-toastify'
+// 1. Imported the assets object (Adjust path if your admin app folder structure is different)
+import { assets } from '../assets/assets' 
 
 const List = ({ token }) => {
 
@@ -64,10 +66,15 @@ const List = ({ token }) => {
             <p>{item.name}</p>
             <p>{item.category}</p>
             <p>{currency}{Number(item.price).toFixed(2)}</p>
-            <p
-              onClick={() => removeProduct(item._id)}
-              className='text-right md:text-center cursor-pointer text-[#C0001A] font-bold hover:text-red-800 transition-colors'
-            >✕</p>
+            
+            <div className='flex justify-end md:justify-center items-center'>
+              <img 
+                onClick={() => removeProduct(item._id)}
+                className='w-5 cursor-pointer hover:scale-110 active:scale-95 transition-all'
+                src={assets.bin_icon} 
+                alt="מחק" 
+              />
+            </div>
           </div>
         ))}
 
