@@ -103,7 +103,7 @@ const PlaceOrder = () => {
           {/* Note instead of payment selector */}
           <p className='text-xs text-[#8C8C8C] leading-relaxed border-r-2 border-[#C0001A] pr-3'>
             לאחר קבלת ואישור ההזמנה,<br />
-            צוות אינטרפרודקט יצור עמך קשר דרך הטלפון<br />
+            צוות אינטרפרודקט יצור עמכם קשר טלפוני<br />
             לקביעת מועד משלוח ותשלום.
           </p>
 

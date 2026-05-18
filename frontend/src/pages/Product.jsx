@@ -10,6 +10,7 @@ const Product = () => {
   const { products, formatPrice, addToCart, token, navigate } = useContext(ShopContext);
   const [productData, setProductData] = useState(false);
   const [image, setImage] = useState('')
+  const [quantity, setQuantity] = useState(1)
 
   const fetchProductData = async () => {
     products.map((item) => {
@@ -23,6 +24,7 @@ const Product = () => {
 
   useEffect(() => {
     fetchProductData();
+    setQuantity(1)
   }, [productId, products])
 
   return productData ? (
@@ -38,6 +40,7 @@ const Product = () => {
 
       <div className='flex gap-12 flex-col sm:flex-row'>
 
+        {/* Images */}
         <div className='flex-1 flex flex-col-reverse gap-3 sm:flex-row'>
           <div className='flex sm:flex-col overflow-x-auto sm:overflow-y-scroll justify-between sm:justify-normal sm:w-[18.7%] w-full'>
             {productData.image.map((item, index) => (
@@ -55,28 +58,50 @@ const Product = () => {
           </div>
         </div>
 
+        {/* Product Info */}
         <div className='flex-1'>
           <h1 className='font-medium text-2xl mt-2'>{productData.name}</h1>
           <p className='mt-5 text-3xl font-medium text-[#C0001A]'>{formatPrice(productData.price)}</p>
           <p className='mt-5 text-[#8C8C8C] md:w-4/5 leading-relaxed'>{productData.description}</p>
 
-          <button
-            onClick={() => {
-              if (!token) {
-                toast.error('יש להתחבר כדי להוסיף מוצרים לסל')
-                navigate('/login')
-                return
-              }
-              addToCart(productData._id, 'default')
-            }}
-            className='mt-8 bg-[#1A1A1A] text-white px-8 py-3 text-sm hover:bg-[#C0001A] transition-colors cursor-pointer rounded'
-          >
-            הוסף לסל
-          </button>
-
           <hr className='mt-8 sm:w-4/5 border-[#F5F5F0]' />
 
-          <div className='text-sm text-[#8C8C8C] mt-5 flex flex-col gap-2'>
+          {/* Quantity + Add to cart */}
+          <div className='mt-6 flex items-center gap-4 sm:w-4/5'>
+            <div className='flex items-center rounded overflow-hidden border border-[#1A1A1A]'>
+              <button
+                onClick={() => setQuantity(prev => Math.max(1, prev - 1))}
+                className='w-10 h-10 flex items-center justify-center text-xl font-light hover:bg-[#F5F5F0] transition-colors cursor-pointer'
+              >
+                −
+              </button>
+              <span className='w-10 h-10 flex items-center justify-center text-sm font-medium border-x border-[#1A1A1A]'>
+                {quantity}
+              </span>
+              <button
+                onClick={() => setQuantity(prev => prev + 1)}
+                className='w-10 h-10 flex items-center justify-center text-xl font-light hover:bg-[#F5F5F0] transition-colors cursor-pointer'
+              >
+                +
+              </button>
+            </div>
+
+            <button
+              onClick={() => {
+                if (!token) {
+                  toast.error('יש להתחבר כדי להוסיף מוצרים לסל')
+                  navigate('/login')
+                  return
+                }
+                addToCart(productData._id, 'default', quantity)
+              }}
+              className='flex-1 h-10 bg-[#1A1A1A] text-white text-sm hover:bg-[#C0001A] transition-colors cursor-pointer rounded'
+            >
+              הוסף לסל
+            </button>
+          </div>
+
+          <div className='text-sm text-[#8C8C8C] mt-6 flex flex-col gap-2'>
             <p>✅ מוצר מקורי ומקצועי</p>
             <p>🚚 משלוח מהיר לכל הארץ</p>
             <p>📞 תמיכה מקצועית לכל שאלה</p>
@@ -93,7 +118,7 @@ const Product = () => {
         </div>
       </div>
 
-      <RelatedProducts category={productData.category} subCategory={productData.subCategory} />
+      <RelatedProducts category={productData.category} currentProductId={productId} />
 
     </div>
   ) : <div className='opacity-0'></div>
