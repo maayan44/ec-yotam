@@ -15,6 +15,7 @@ const ShopContextProvider = (props) => {
     const [showSearch, setShowSearch] = useState(false);
     const [cartItems, setCartItems] = useState({});
     const [products, setProducts] = useState([]);
+    const [productsLoading, setProductsLoading] = useState(true);
     const [token, setToken] = useState('')
     const navigate = useNavigate();
 
@@ -98,6 +99,7 @@ const ShopContextProvider = (props) => {
 
     const getProductsData = async () => {
         try {
+            setProductsLoading(true)
             const response = await axios.get(backendUrl + '/api/product/list')
             if (response.data.success) {
                 setProducts(response.data.products)
@@ -107,6 +109,8 @@ const ShopContextProvider = (props) => {
         } catch (error) {
             console.log(error)
             toast.error(error.message)
+        } finally {
+            setProductsLoading(false)
         }
     }
 
@@ -149,6 +153,7 @@ const ShopContextProvider = (props) => {
         getCartAmount, navigate, backendUrl,
         token, setToken,
         formatPrice,
+        productsLoading,
     }
 
     return (

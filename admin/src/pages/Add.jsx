@@ -17,6 +17,25 @@ const Add = ({ token }) => {
   const [category, setCategory] = useState("מוצרי חשמל")
   const [bestseller, setBestseller] = useState(false)
 
+  const handlePriceInput = (e) => {
+    const raw = e.target.value.replace(/[^\d.]/g, '')
+
+    // Allow free typing, just enforce max 2 decimal places
+    const parts = raw.split('.')
+    if (parts.length > 2) return // block multiple dots
+
+    if (parts[1] !== undefined && parts[1].length > 2) return // block more than 2 decimal digits
+
+    setPrice(raw)
+  }
+
+  const handlePriceBlur = () => {
+    if (price === '' || price === '.') { setPrice(''); return; }
+    const num = parseFloat(price)
+    if (isNaN(num)) { setPrice(''); return; }
+    setPrice(num.toFixed(2))
+  }
+
   const onSubmitHandler = async (e) => {
     e.preventDefault()
 
@@ -126,15 +145,18 @@ const Add = ({ token }) => {
 
         <div>
           <p className='mb-2 font-medium'>מחיר (₪)</p>
-          <input
-            onChange={(e) => setPrice(e.target.value)}
-            value={price}
-            className='w-full px-3 py-2 sm:w-[120px] border border-gray-300 rounded'
-            type="number"
-            placeholder='99.00'
-            step="0.01"
-            min="0"
-          />
+          <div className='relative sm:w-[120px]'>
+            <input
+              onChange={handlePriceInput}
+              onBlur={handlePriceBlur}
+              value={price}
+              placeholder='0.00'
+              className='w-full px-3 py-2 border border-gray-300 rounded'
+              type="text"
+              inputMode="numeric"
+            />
+            <span className='absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm'>₪</span>
+          </div>
         </div>
 
       </div>

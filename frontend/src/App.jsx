@@ -15,6 +15,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import PromoBanner from './components/PromoBanner'
 import ScrollToTop from './components/ScrollToTop'
+import NotFound from './pages/NotFound'
 
 const App = () => {
   return (
@@ -33,6 +34,7 @@ const App = () => {
           <Route path='/login' element={<Login />} />
           <Route path='/place-order' element={<PlaceOrder />} />
           <Route path='/orders' element={<Orders />} />
+          <Route path='*' element={<NotFound />} />
         </Routes>
       </div>
       <Footer />

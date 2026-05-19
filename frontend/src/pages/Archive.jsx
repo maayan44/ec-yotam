@@ -6,7 +6,7 @@ import Title from '../components/Title'
 import ProductItem from '../components/ProductItem'
 
 const Archive = () => {
-  const { products, search, showSearch } = useContext(ShopContext);
+  const { products, search, showSearch, productsLoading } = useContext(ShopContext);
   const [searchParams] = useSearchParams();
 
   const [showFilter, setShowFilter] = useState(false);
@@ -111,11 +111,24 @@ const Archive = () => {
         </div>
 
         {/* Map Products */}
-        <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 gap-y-6'>
-          {filterProducts.map((item) => (
-            <ProductItem key={item._id} name={item.name} id={item._id} price={item.price} image={item.image} />
-          ))}
-        </div>
+        {productsLoading ? (
+          <div className='col-span-full flex flex-col items-center justify-center py-24 gap-4'>
+            <div
+              className='w-10 h-10 rounded-full border-2 border-[#F5F5F0] border-t-[#C0001A]'
+              style={{ animation: 'spin 0.75s linear infinite' }}
+            />
+            <p className='text-sm text-[#8C8C8C]' style={{ fontFamily: 'Heebo, sans-serif' }}>
+              טוען מוצרים...
+            </p>
+            <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
+          </div>
+        ) : (
+          <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 gap-y-6'>
+            {filterProducts.map((item) => (
+              <ProductItem key={item._id} name={item.name} id={item._id} price={item.price} image={item.image} />
+            ))}
+          </div>
+        )}
       </div>
 
     </div>

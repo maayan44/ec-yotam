@@ -41,9 +41,9 @@ const Cart = () => {
         <div className='flex flex-col items-center justify-center py-24 text-center' dir="rtl">
           <div className='w-20 h-20 mb-6 rounded-full bg-[#F5F5F0] flex items-center justify-center'>
             <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#8C8C8C" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
-              <line x1="3" y1="6" x2="21" y2="6"/>
-              <path d="M16 10a4 4 0 0 1-8 0"/>
+              <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
+              <line x1="3" y1="6" x2="21" y2="6" />
+              <path d="M16 10a4 4 0 0 1-8 0" />
             </svg>
           </div>
           <h2 className='text-xl font-medium text-[#1A1A1A] mb-2' style={{ fontFamily: 'Heebo, sans-serif' }}>
@@ -79,13 +79,35 @@ const Cart = () => {
                 </div>
               </div>
 
-              <input
-                onChange={(e) => e.target.value === '' || e.target.value === '0' ? null : updateQuantity(item._id, item.size, Number(e.target.value))}
-                className='border max-w-10 sm:max-w-20 px-1 sm:px-2 py-1'
-                type="number"
-                min={1}
-                value={item.quantity}
-              />
+              <div className='flex items-center gap-0' dir="rtl">
+                <div className='group relative flex items-center justify-center h-9 w-16 bg-white border border-[#1A1A1A] rounded-full cursor-default select-none overflow-hidden'>
+                  <div className='flex items-center gap-1'>
+                    <span className='text-sm font-medium text-[#1A1A1A]'>{item.quantity}</span>
+                    <div className='flex flex-col opacity-0 group-hover:opacity-100 transition-opacity'>
+                      <button
+                        onMouseDown={(e) => {
+                          e.preventDefault()
+                          updateQuantity(item._id, item.size, item.quantity + 1)
+                        }}
+                        className='flex items-center justify-center w-5 h-4 text-[10px] text-[#1A1A1A] hover:text-[#C0001A] transition-colors leading-none cursor-pointer'
+                        style={{ lineHeight: 1 }}
+                      >
+                        ▲
+                      </button>
+                      <button
+                        onMouseDown={(e) => {
+                          e.preventDefault()
+                          if (item.quantity > 1) updateQuantity(item._id, item.size, item.quantity - 1)
+                        }}
+                        className='flex items-center justify-center w-5 h-4 text-[10px] text-[#1A1A1A] hover:text-[#C0001A] transition-colors leading-none cursor-pointer'
+                        style={{ lineHeight: 1 }}
+                      >
+                        ▼
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
               <img
                 onClick={() => updateQuantity(item._id, item.size, 0)}
