@@ -67,25 +67,7 @@ const Product = () => {
           <hr className='mt-8 sm:w-4/5 border-[#F5F5F0]' />
 
           {/* Quantity + Add to cart */}
-          <div className='mt-6 flex items-center gap-4 sm:w-4/5'>
-            <div className='flex items-center rounded overflow-hidden border border-[#1A1A1A]'>
-              <button
-                onClick={() => setQuantity(prev => Math.max(1, prev - 1))}
-                className='w-10 h-10 flex items-center justify-center text-xl font-light hover:bg-[#F5F5F0] transition-colors cursor-pointer'
-              >
-                −
-              </button>
-              <span className='w-10 h-10 flex items-center justify-center text-sm font-medium border-x border-[#1A1A1A]'>
-                {quantity}
-              </span>
-              <button
-                onClick={() => setQuantity(prev => prev + 1)}
-                className='w-10 h-10 flex items-center justify-center text-xl font-light hover:bg-[#F5F5F0] transition-colors cursor-pointer'
-              >
-                +
-              </button>
-            </div>
-
+          <div className='mt-6 flex items-center gap-0' dir="rtl">
             <button
               onClick={() => {
                 if (!token) {
@@ -95,10 +77,34 @@ const Product = () => {
                 }
                 addToCart(productData._id, 'default', quantity)
               }}
-              className='flex-1 h-10 bg-[#1A1A1A] text-white text-sm hover:bg-[#C0001A] transition-colors cursor-pointer rounded'
+              className='h-11 bg-[#1A1A1A] text-white text-sm font-medium rounded-r-full hover:bg-[#333] transition-colors cursor-pointer px-8'
+              style={{ fontFamily: 'Heebo, sans-serif' }}
             >
               הוסף לסל
             </button>
+
+            <div className='group relative flex items-center justify-center h-11 w-20 bg-white border border-[#1A1A1A] rounded-l-full cursor-default select-none overflow-hidden'>
+              <div className='flex items-center gap-1'>
+                <span className='text-sm font-medium text-[#1A1A1A]'>{quantity}</span>
+                <div className='flex flex-col opacity-0 group-hover:opacity-100 transition-opacity'>
+                  <button
+                    onMouseDown={(e) => { e.preventDefault(); setQuantity(prev => prev + 1) }}
+                    className='flex items-center justify-center w-5 h-5 text-[10px] text-[#1A1A1A] hover:text-[#C0001A] transition-colors leading-none cursor-pointer'
+                    style={{ lineHeight: 1 }}
+                  >
+                    ▲
+                  </button>
+                  <button
+                    onMouseDown={(e) => { e.preventDefault(); setQuantity(prev => Math.max(1, prev - 1)) }}
+                    className='flex items-center justify-center w-5 h-5 text-[10px] text-[#1A1A1A] hover:text-[#C0001A] transition-colors leading-none cursor-pointer'
+                    style={{ lineHeight: 1 }}
+                  >
+                    ▼
+                  </button>
+                </div>
+              </div>
+            </div>
+
           </div>
 
           <div className='text-sm text-[#8C8C8C] mt-6 flex flex-col gap-2'>

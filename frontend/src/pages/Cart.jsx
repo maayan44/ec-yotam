@@ -36,6 +36,31 @@ const Cart = () => {
         <Title text1={'סל'} text2={'הקניות'} />
       </div>
 
+      {/* Part 1: Shows only when the cart is empty */}
+      {cartData.length === 0 && (
+        <div className='flex flex-col items-center justify-center py-24 text-center' dir="rtl">
+          <div className='w-20 h-20 mb-6 rounded-full bg-[#F5F5F0] flex items-center justify-center'>
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#8C8C8C" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+              <line x1="3" y1="6" x2="21" y2="6"/>
+              <path d="M16 10a4 4 0 0 1-8 0"/>
+            </svg>
+          </div>
+          <h2 className='text-xl font-medium text-[#1A1A1A] mb-2' style={{ fontFamily: 'Heebo, sans-serif' }}>
+            העגלה שלך ריקה
+          </h2>
+          <p className='text-[#8C8C8C] text-sm mb-8'>לא הוספת מוצרים עדיין</p>
+          <button
+            onClick={() => navigate('/collection')}
+            className='bg-[#1A1A1A] text-white text-sm px-8 py-3 cursor-pointer hover:bg-[#C0001A] transition-colors rounded'
+            style={{ fontFamily: 'Heebo, sans-serif' }}
+          >
+            לקטלוג המוצרים
+          </button>
+        </div>
+      )}
+
+      {/* Product Items List Container */}
       <div>
         {cartData.map((item, index) => {
           const productData = products.find((product) => product._id === item._id);
@@ -74,26 +99,29 @@ const Cart = () => {
         })}
       </div>
 
-      <div className='flex justify-start my-20'>
-        <div className='w-full sm:w-[450px]'>
-          <CartTotal />
-          <div className='w-full text-start mt-4'>
-            <button
-              onClick={() => {
-                if (!token) {
-                  toast.error('יש להתחבר כדי להמשיך לתשלום')
-                  navigate('/login')
-                  return
-                }
-                navigate('/place-order')
-              }}
-              className='bg-[#1A1A1A] text-white text-sm px-8 py-3 cursor-pointer hover:bg-[#C0001A] transition-colors rounded'
-            >
-              המשך לתשלום
-            </button>
+      {/* Part 2: Shows totals and payment actions only when products exist in cartData */}
+      {cartData.length > 0 && (
+        <div className='flex justify-start my-20'>
+          <div className='w-full sm:w-[450px]'>
+            <CartTotal />
+            <div className='w-full text-start mt-4'>
+              <button
+                onClick={() => {
+                  if (!token) {
+                    toast.error('יש להתחבר כדי להמשיך לתשלום')
+                    navigate('/login')
+                    return
+                  }
+                  navigate('/place-order')
+                }}
+                className='bg-[#1A1A1A] text-white text-sm px-8 py-3 cursor-pointer hover:bg-[#C0001A] transition-colors rounded'
+              >
+                המשך לתשלום
+              </button>
+            </div>
           </div>
         </div>
-      </div>
+      )}
 
     </div>
   )
