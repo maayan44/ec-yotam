@@ -6,6 +6,7 @@ import { ShopContext } from '../context/ShopContext.jsx';
 const Navbar = () => {
     const [visible, setVisible] = useState(false);
     const [scrolled, setScrolled] = useState(false);
+    const [profileOpen, setProfileOpen] = useState(false);
     const { search, setSearch, showSearch, setShowSearch, getCartCount, navigate, token, setToken, setCartItems } = useContext(ShopContext);
 
     useEffect(() => {
@@ -13,6 +14,12 @@ const Navbar = () => {
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
+
+    useEffect(() => {
+        const handleClickOutside = () => setProfileOpen(false)
+        if (profileOpen) document.addEventListener('click', handleClickOutside)
+        return () => document.removeEventListener('click', handleClickOutside)
+    }, [profileOpen]);
 
     const logout = () => {
         navigate('/login')
@@ -100,17 +107,28 @@ const Navbar = () => {
                     />
                 </div>
 
-                <div className='group relative'>
-                    <img onClick={() => token ? null : navigate('/login')} className='w-5 cursor-pointer invert' src={assets.profile_icon} alt="פרופיל" />
-                    {token &&
-                        <div className='group-hover:block hidden absolute dropdown-menu left-0 pt-4 z-50'>
+                {/* Profile */}
+                <div className='relative' onClick={(e) => e.stopPropagation()}>
+                    <img
+                        onClick={() => {
+                            if (!token) { navigate('/login'); return }
+                            setProfileOpen(!profileOpen)
+                        }}
+                        className='w-5 cursor-pointer invert'
+                        src={assets.profile_icon}
+                        alt="פרופיל"
+                    />
+                    {token && profileOpen && (
+                        <div className='absolute left-0 pt-4 z-50'>
                             <div className='flex flex-col gap-2 w-36 py-3 px-5 bg-[#2a2a2a] text-white/70 rounded text-sm'>
-                                <p onClick={() => navigate('/orders')} className='cursor-pointer hover:text-white'>ההזמנות שלי</p>
-                                <p onClick={logout} className='cursor-pointer hover:text-white'>התנתק</p>
+                                <p onClick={() => { navigate('/orders'); setProfileOpen(false) }} className='cursor-pointer hover:text-white'>ההזמנות שלי</p>
+                                <p onClick={() => { logout(); setProfileOpen(false) }} className='cursor-pointer hover:text-white'>התנתק</p>
                             </div>
-                        </div>}
+                        </div>
+                    )}
                 </div>
 
+                {/* Cart */}
                 <Link to='/cart' className='relative'>
                     <img src={assets.cart_icon} className='w-5 min-w-5 invert' alt="סל קניות" />
                     <p className='absolute left-[-5px] bottom-[-5px] w-4 text-center leading-4 bg-[#C0001A] text-white aspect-square rounded-full text-[8px]'>
@@ -118,6 +136,7 @@ const Navbar = () => {
                     </p>
                 </Link>
 
+                {/* Mobile menu toggle */}
                 <img onClick={() => setVisible(true)} src={assets.menu_icon} className='w-5 cursor-pointer sm:hidden invert' alt="תפריט" />
             </div>
 
