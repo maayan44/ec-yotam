@@ -46,7 +46,15 @@ const Footer = () => {
       <div className='px-8'>
         <hr className='border-white/10' />
         <p className='py-5 text-xs text-center text-white/30'>
-          © 2026 Interproduct.co.il — כל הזכויות שמורות &nbsp;·&nbsp; Ciano Webs
+          © 2026 Interproduct.co.il — כל הזכויות שמורות &nbsp;·&nbsp;{' '}
+          <a
+            href='https://ciano-webs.vercel.app/'
+            target='_blank'
+            rel='noopener noreferrer'
+            className='hover:text-white/60 transition-colors'
+          >
+            Ciano Webs
+          </a>
         </p>
       </div>
 
