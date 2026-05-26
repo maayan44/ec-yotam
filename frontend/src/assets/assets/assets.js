@@ -19,6 +19,7 @@ import vid1_poster from './vid1_poster.jpg'
 import brand_pro from './brand_pro.png'
 import brand_insta from './brand_insta.png'
 import brand_automagic from './brand_automagic.png'
+import brand_kroxx from './brand_kroxx.png'
 
 export const assets = {
     logo,
@@ -42,4 +43,5 @@ export const assets = {
     brand_pro,
     brand_insta,
     brand_automagic,
+    brand_kroxx,
 }

@@ -13,7 +13,7 @@ const row2Brands = [
   { name: 'Brand Pro', image: assets.brand_pro },
   { name: 'Brand Insta', image: assets.brand_insta },
   { name: 'Brand Automagic', image: assets.brand_automagic },
-  { name: 'Brand X Three', image: assets.x },
+  { name: 'Brand X Three', image: assets.brand_kroxx },
 ]
 
 const BrandLogos = () => {
