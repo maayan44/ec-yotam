@@ -16,6 +16,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import PromoBanner from './components/PromoBanner'
 import ScrollToTop from './components/ScrollToTop'
 import NotFound from './pages/NotFound'
+import Privacy from './pages/Privacy'
 
 const App = () => {
   return (
@@ -35,6 +36,7 @@ const App = () => {
           <Route path='/place-order' element={<PlaceOrder />} />
           <Route path='/orders' element={<Orders />} />
           <Route path='*' element={<NotFound />} />
+          <Route path='/privacy' element={<Privacy />} />
         </Routes>
       </div>
       <Footer />

@@ -8,6 +8,7 @@ import { toast } from 'react-toastify'
 const PlaceOrder = () => {
 
   const { navigate, backendUrl, token, cartItems, setCartItems, getCartAmount, delivery_fee, products } = useContext(ShopContext);
+  const [agreedToPolicy, setAgreedToPolicy] = useState(false)
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -107,10 +108,29 @@ const PlaceOrder = () => {
             לקביעת מועד משלוח ותשלום.
           </p>
 
-          <div className='w-full text-start mt-8'>
+          {/* Policy checkbox */}
+          <div className='flex items-start gap-2 mt-6' dir='rtl'>
+            <input
+              type='checkbox'
+              id='policyAgree'
+              checked={agreedToPolicy}
+              onChange={(e) => setAgreedToPolicy(e.target.checked)}
+              className='mt-0.5 cursor-pointer accent-[#C0001A]'
+              required
+            />
+            <label htmlFor='policyAgree' className='text-xs text-[#8C8C8C] leading-relaxed cursor-pointer'>
+              לחיצה על 'שלח הזמנה' אני מאשר כי קראתי והסכמתי ל
+              <a href='/privacy' target='_blank' className='text-[#C0001A] hover:underline mx-0.5'>
+                מדיניות הפרטיות
+              </a>
+            </label>
+          </div>
+
+          <div className='w-full text-start mt-4'>
             <button
               type='submit'
-              className='bg-[#1A1A1A] text-white px-16 py-3 text-sm cursor-pointer hover:bg-[#C0001A] transition-colors rounded'
+              disabled={!agreedToPolicy}
+              className={`px-16 py-3 text-sm rounded transition-colors ${agreedToPolicy ? 'bg-[#1A1A1A] text-white cursor-pointer hover:bg-[#C0001A]' : 'bg-[#d0d0d0] text-white cursor-not-allowed'}`}
             >
               בצע הזמנה
             </button>

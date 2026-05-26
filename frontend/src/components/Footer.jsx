@@ -24,7 +24,7 @@ const Footer = () => {
             <li>
               <Link to='/about' className='hover:text-[#C0001A] transition-colors'>אודות</Link>
             </li>
-            <li className='hover:text-[#C0001A] cursor-pointer transition-colors'>מדיניות פרטיות</li>
+            <Link to='/privacy' className='hover:text-[#C0001A] transition-colors'>מדיניות פרטיות</Link>
           </ul>
         </div>
 
