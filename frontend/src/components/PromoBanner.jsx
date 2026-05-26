@@ -13,7 +13,7 @@ const PromoBanner = () => {
         {[0,1,2,3].map((i) => (
           <div key={i} style={{ display: 'flex', alignItems: 'center', flexShrink: 0 }}>
             <Link to='/collection' className='hover:underline text-sm font-medium' style={{ padding: '0 48px', whiteSpace: 'nowrap' }}>
-              משלוח מהיר לכל הארץ בקנייה מעל ₪499
+              משלוח מהיר לכל הארץ בקנייה מעל ₪799
             </Link>
             <span style={{ color: 'rgba(255,255,255,0.4)' }}>·</span>
             <span className='text-sm font-medium' style={{ padding: '0 48px', whiteSpace: 'nowrap' }}>
