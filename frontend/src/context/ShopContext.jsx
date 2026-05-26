@@ -6,8 +6,12 @@ import axios from 'axios'
 export const ShopContext = createContext();
 
 const ShopContextProvider = (props) => {
+    
     const currency = '₪';
-    const delivery_fee = 10;
+    const MIN_ORDER = 599;
+    const FREE_DELIVERY_THRESHOLD = 799;
+    const DELIVERY_FEE = 200;
+
     const backendUrl = import.meta.env.VITE_BACKEND_URL
     const formatPrice = (amount) => `${Number(amount).toFixed(2)} ₪`
 
@@ -146,7 +150,9 @@ const ShopContextProvider = (props) => {
     }, [token]);
 
     const value = {
-        products, currency, delivery_fee,
+        products, currency,
+        delivery_fee: getCartAmount() >= FREE_DELIVERY_THRESHOLD ? 0 : DELIVERY_FEE,
+        MIN_ORDER,
         search, setSearch, showSearch, setShowSearch,
         cartItems, addToCart, setCartItems,
         getCartCount, updateQuantity,

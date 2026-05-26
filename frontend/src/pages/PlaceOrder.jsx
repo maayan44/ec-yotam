@@ -7,7 +7,7 @@ import { toast } from 'react-toastify'
 
 const PlaceOrder = () => {
 
-  const { navigate, backendUrl, token, cartItems, setCartItems, getCartAmount, delivery_fee, products } = useContext(ShopContext);
+  const { navigate, backendUrl, token, cartItems, setCartItems, getCartAmount, delivery_fee, MIN_ORDER, products } = useContext(ShopContext);
   const [agreedToPolicy, setAgreedToPolicy] = useState(false)
   const [formData, setFormData] = useState({
     firstName: '',
@@ -27,6 +27,10 @@ const PlaceOrder = () => {
   const onSubmitHandler = async (event) => {
     event.preventDefault();
     try {
+      if (getCartAmount() < MIN_ORDER) {
+        toast.error(`סכום מינימלי להזמנה הוא ₪${MIN_ORDER}`)
+        return;
+      }
       let orderItems = []
       for (const items in cartItems) {
         for (const item in cartItems[items]) {
@@ -62,6 +66,10 @@ const PlaceOrder = () => {
       toast.error(error.message)
     }
   }
+
+  const cartAmount = getCartAmount()
+  const belowMinimum = cartAmount < MIN_ORDER
+  const canSubmit = agreedToPolicy && !belowMinimum
 
   return (
     <form onSubmit={onSubmitHandler} className='flex flex-col sm:flex-row justify-between gap-4 pt-5 sm:pt-14 min-h-[80vh] border-t'>
@@ -108,6 +116,14 @@ const PlaceOrder = () => {
             לקביעת מועד משלוח ותשלום.
           </p>
 
+          {/* Minimum order warning */}
+          {belowMinimum && (
+            <div className='mt-4 text-xs text-[#C0001A] border border-[#C0001A]/30 rounded px-3 py-2 bg-[#C0001A]/5' dir='rtl'>
+              <p>סכום מינימום להזמנה: ₪{MIN_ORDER}</p>
+              <p>חסר ₪{(MIN_ORDER - cartAmount).toFixed(2)} להשלמת ההזמנה</p>
+            </div>
+          )}
+
           {/* Policy checkbox */}
           <div className='flex items-start gap-2 mt-6' dir='rtl'>
             <input
@@ -116,7 +132,6 @@ const PlaceOrder = () => {
               checked={agreedToPolicy}
               onChange={(e) => setAgreedToPolicy(e.target.checked)}
               className='mt-0.5 cursor-pointer accent-[#C0001A]'
-              required
             />
             <label htmlFor='policyAgree' className='text-xs text-[#8C8C8C] leading-relaxed cursor-pointer'>
               לחיצה על 'שלח הזמנה' אני מאשר כי קראתי והסכמתי ל
@@ -129,8 +144,8 @@ const PlaceOrder = () => {
           <div className='w-full text-start mt-4'>
             <button
               type='submit'
-              disabled={!agreedToPolicy}
-              className={`px-16 py-3 text-sm rounded transition-colors ${agreedToPolicy ? 'bg-[#1A1A1A] text-white cursor-pointer hover:bg-[#C0001A]' : 'bg-[#d0d0d0] text-white cursor-not-allowed'}`}
+              disabled={!canSubmit}
+              className={`px-16 py-3 text-sm rounded transition-colors ${canSubmit ? 'bg-[#1A1A1A] text-white cursor-pointer hover:bg-[#C0001A]' : 'bg-[#d0d0d0] text-white cursor-not-allowed'}`}
             >
               בצע הזמנה
             </button>
