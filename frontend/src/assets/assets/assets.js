@@ -22,6 +22,7 @@ import brand_pro from './brand_pro.png'
 import brand_insta from './brand_insta.png'
 import brand_automagic from './brand_automagic.png'
 import brand_kroxx from './brand_kroxx.png'
+import cianowebs_logo from './cianowebs_logo.png'
 
 export const assets = {
     logo,
@@ -48,4 +49,5 @@ export const assets = {
     brand_insta,
     brand_automagic,
     brand_kroxx,
+    cianowebs_logo,
 }

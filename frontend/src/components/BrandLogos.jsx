@@ -33,7 +33,7 @@ const BrandLogos = () => {
         {row1Brands.map((brand, i) => (
           <div
             key={i}
-            className='flex-1 flex items-center justify-center border border-[#F5F5F0] rounded-lg py-6 px-4 hover:border-[#C0001A] hover:shadow-sm transition-all cursor-pointer'
+            className='flex-1 flex items-center justify-center border border-[#F5F5F0] rounded-lg py-6 px-4'
           >
             <img src={brand.image} alt={brand.name} className='w-full max-h-12 object-contain' />
           </div>
@@ -45,7 +45,7 @@ const BrandLogos = () => {
         {row2Brands.map((brand, i) => (
           <div
             key={i}
-            className='flex items-center justify-center border border-[#F5F5F0] rounded-lg py-5 px-3 hover:border-[#C0001A] hover:shadow-sm transition-all cursor-pointer'
+            className='flex items-center justify-center border border-[#F5F5F0] rounded-lg py-5 px-3'
           >
             {/* max-h-[38px] scales the image asset down to exactly 80% of max-h-12 (48px) */}
             <img src={brand.image} alt={brand.name} className='w-full max-h-[38px] object-contain' />

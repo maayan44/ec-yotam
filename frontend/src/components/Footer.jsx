@@ -51,9 +51,8 @@ const Footer = () => {
             href='https://ciano-webs.vercel.app/'
             target='_blank'
             rel='noopener noreferrer'
-            className='hover:text-white/60 transition-colors'
           >
-            Ciano Webs
+            <img src={assets.cianowebs_logo} alt='Ciano Webs' className='h-5 inline-block opacity-30 hover:opacity-60 transition-opacity align-middle mb-0.5' />
           </a>
         </p>
       </div>
