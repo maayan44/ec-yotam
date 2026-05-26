@@ -15,6 +15,8 @@ import vacuum_icon from './vacuum_icon.png'
 import smell_icon from './smell_icon.png'
 import cleaning_icon from './cleaning_icon.png'
 import parts_icon from './parts_icon.png'
+import materials_icon from './materials_icon.png'
+import polish_icon from './polish_icon.png'
 import vid1_poster from './vid1_poster.jpg'
 import brand_pro from './brand_pro.png'
 import brand_insta from './brand_insta.png'
@@ -32,6 +34,8 @@ export const assets = {
     menu_icon,
     contact_img,
     cross_icon,
+    materials_icon,
+    polish_icon,
     vid1,
     x,
     whatsapp_icon,

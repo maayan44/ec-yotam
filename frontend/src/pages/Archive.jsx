@@ -81,7 +81,7 @@ const Archive = () => {
         <div className={`border border-[#A3A5A1] pr-5 py-3 mt-6 ${showFilter ? '' : 'hidden'} sm:block`}>
           <p className='mb-3 text-sm font-medium pr-5'>קטגוריות</p>
           <div className='flex flex-col gap-2 text-sm font-light text-[#535551] pr-5'>
-            {['מוצרי חשמל', 'נוזלי ניקוי', 'מוצרי ריח', 'חלקי חילוף'].map((cat) => (
+            {['אביזרי עזר', 'חומרי עזר', 'נוזלי ניקוי', 'מוצרי ריח', 'אביזרים למכשירים'].map((cat) => (
               <p key={cat} className='flex gap-2 items-center'>
                 <input
                   className='w-3'

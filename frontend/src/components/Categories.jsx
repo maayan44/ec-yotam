@@ -4,10 +4,11 @@ import Title from './Title'
 import { assets } from '../assets/assets/assets.js'
 
 const categories = [
-  { name: 'מוצרי חשמל', icon: assets.vacuum_icon, value: 'מוצרי חשמל' },
+  { name: 'אביזרי עזר', icon: assets.polish_icon, value: 'אביזרי עזר' },
+  { name: 'חומרי עזר', icon: assets.materials_icon, value: 'חומרי עזר' },
   { name: 'נוזלי ניקוי', icon: assets.cleaning_icon, value: 'נוזלי ניקוי' },
   { name: 'מוצרי ריח', icon: assets.smell_icon, value: 'מוצרי ריח' },
-  { name: 'חלקי חילוף', icon: assets.parts_icon, value: 'חלקי חילוף' },
+  { name: 'אביזרים למכשירים', icon: assets.parts_icon, value: 'אביזרים למכשירים' },
 ]
 
 const Categories = () => {
@@ -26,7 +27,7 @@ const Categories = () => {
         </p>
       </div>
 
-      <div className='grid grid-cols-2 sm:grid-cols-4 gap-6 justify-items-center'>
+      <div className='grid grid-cols-3 sm:grid-cols-5 gap-6 justify-items-center'>
         {categories.map((cat, i) => (
           <div
             key={i}
