@@ -1,5 +1,6 @@
 import express from 'express'
 import cors from 'cors'
+import helmet from 'helmet'
 import 'dotenv/config'
 import { connect } from 'mongoose'
 import connectDB from './config/mongodb.js'
@@ -14,6 +15,33 @@ const app = express()
 const port = process.env.PORT || 4000
 connectDB()
 connectCloudinary()
+
+// Security Headers
+app.use(
+    helmet({
+        contentSecurityPolicy: {
+            directives: {
+                defaultSrc: ["'none'"],
+                frameAncestors: ["'none'"],
+            },
+        },
+        referrerPolicy: { policy: 'no-referrer' },
+        strictTransportSecurity: {
+            maxAge: 31536000,
+            includeSubDomains: true,
+        },
+        xFrameOptions: { action: 'deny' },
+    })
+)
+
+// Permissions-Policy (not included in Helmet by default — set manually)
+app.use((req, res, next) => {
+    res.setHeader(
+        'Permissions-Policy',
+        'camera=(), microphone=(), geolocation=(), payment=()'
+    )
+    next()
+})
 
 // Middlewares
 app.use(express.json())
