@@ -38,6 +38,7 @@ const About = () => {
         </div>
       </div>
 
+      {/* Why to choose us section 
       <div className='text-xl py-4'>
         <Title text1={'למה'} text2={'לבחור בנו'} />
       </div>
@@ -62,6 +63,7 @@ const About = () => {
             We pride ourselves on providing a personalized experience that reflects the same care and attention to detail found in every garment we produce.</p>
         </div>
       </div>
+      */}
 
     </div>
   )

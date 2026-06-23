@@ -18,6 +18,8 @@ import parts_icon from './parts_icon.png'
 import materials_icon from './materials_icon.png'
 import polish_icon from './polish_icon.png'
 import vid1_poster from './vid1_poster.jpg'
+import nu_look from './nu_look.png'
+import chamoitex from './chamoitex.png'
 import brand_pro from './brand_pro.png'
 import brand_insta from './brand_insta.png'
 import brand_automagic from './brand_automagic.png'
@@ -45,6 +47,8 @@ export const assets = {
     cleaning_icon,
     parts_icon,
     vid1_poster,
+    nu_look,
+    chamoitex,
     brand_pro,
     brand_insta,
     brand_automagic,

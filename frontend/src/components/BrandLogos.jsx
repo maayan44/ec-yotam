@@ -4,8 +4,8 @@ import { assets } from '../assets/assets/assets.js'
 
 // Row 1: Original Products
 const row1Brands = [
-  { name: 'Brand X One', image: assets.x },
-  { name: 'Brand X Two', image: assets.x },
+  { name: 'Brand X One', image: assets.nu_look },
+  { name: 'Brand X Two', image: assets.chamoitex },
 ]
 
 // Row 2: Other Brands

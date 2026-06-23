@@ -14,7 +14,7 @@ const Add = ({ token }) => {
   const [name, setName] = useState("")
   const [description, setDescription] = useState("")
   const [price, setPrice] = useState("")
-  const [category, setCategory] = useState("מוצרי חשמל")
+  const [category, setCategory] = useState("אביזרי עזר")
   const [bestseller, setBestseller] = useState(false)
 
   const handlePriceInput = (e) => {
@@ -136,10 +136,11 @@ const Add = ({ token }) => {
             value={category}
             className='w-full px-3 py-2 border border-gray-300 rounded'
           >
-            <option value="מוצרי חשמל">מוצרי חשמל</option>
+            <option value="אביזרי עזר">אביזרי עזר</option>
+            <option value="חומרי עזר">חומרי עזר</option>
             <option value="נוזלי ניקוי">נוזלי ניקוי</option>
             <option value="מוצרי ריח">מוצרי ריח</option>
-            <option value="חלקי חילוף">חלקי חילוף</option>
+            <option value="אביזרים למכשירים">אביזרים למכשירים</option>
           </select>
         </div>
 

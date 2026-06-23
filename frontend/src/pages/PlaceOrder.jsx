@@ -113,7 +113,8 @@ const PlaceOrder = () => {
           <p className='text-xs text-[#8C8C8C] leading-relaxed border-r-2 border-[#C0001A] pr-3'>
             לאחר קבלת ואישור ההזמנה,<br />
             צוות אינטרפרודקט יצור עמכם קשר טלפוני<br />
-            לקביעת מועד משלוח ותשלום.
+            לקביעת מועד משלוח ותשלום.<br />
+            * ייתכנו עלויות משלוח נוספות לאזורים מרוחקים (בהתאם למדיניות המשלוחים שלנו).
           </p>
 
           {/* Minimum order warning */}
@@ -121,6 +122,11 @@ const PlaceOrder = () => {
             <div className='mt-4 text-xs text-[#C0001A] border border-[#C0001A]/30 rounded px-3 py-2 bg-[#C0001A]/5' dir='rtl'>
               <p>סכום מינימום להזמנה: ₪{MIN_ORDER}</p>
               <p>חסר ₪{(MIN_ORDER - cartAmount).toFixed(2)} להשלמת ההזמנה</p>
+
+              {/* Thin separation line */}
+              <hr className='border-t border-[#C0001A] my-2' />
+
+              <p>למשלוחים מתחת ל1499₪ יש ליצור קשר טלפוני</p>
             </div>
           )}
 

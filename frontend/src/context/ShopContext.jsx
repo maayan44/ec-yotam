@@ -8,8 +8,8 @@ export const ShopContext = createContext();
 const ShopContextProvider = (props) => {
     
     const currency = '₪';
-    const MIN_ORDER = 599;
-    const FREE_DELIVERY_THRESHOLD = 799;
+    const MIN_ORDER = 1499;
+    const FREE_DELIVERY_THRESHOLD = 1699;
     const DELIVERY_FEE = 200;
 
     const backendUrl = import.meta.env.VITE_BACKEND_URL

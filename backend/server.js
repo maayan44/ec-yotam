@@ -2,7 +2,6 @@ import express from 'express'
 import cors from 'cors'
 import helmet from 'helmet'
 import 'dotenv/config'
-import { connect } from 'mongoose'
 import connectDB from './config/mongodb.js'
 import connectCloudinary from './config/cloudinary.js'
 import userRouter from './routes/userRoute.js'
@@ -43,9 +42,27 @@ app.use((req, res, next) => {
     next()
 })
 
+// CORS
+const allowedOrigins = [
+    'https://interproduct.co.il',
+    'https://www.interproduct.co.il',
+    'https://admin.interproduct.co.il',
+    process.env.DEV_ORIGIN,
+].filter(Boolean)
+
+app.use(cors({
+    origin: (origin, callback) => {
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true)
+        } else {
+            callback(new Error('Not allowed by CORS'))
+        }
+    },
+    credentials: true,
+}))
+
 // Middlewares
 app.use(express.json())
-app.use(cors())
 
 // Api Endpoints
 app.use('/api/user', userRouter)

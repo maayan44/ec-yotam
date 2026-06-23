@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 
 const ProductItem = ({ id, image, name, price }) => {
 
-    const { formatPrice } = useContext(ShopContext);
+    const { formatPrice, token } = useContext(ShopContext);
 
   return (
     <Link className='text-[#1A1A1A] cursor-pointer block w-full' to={`/product/${id}`}>
@@ -12,7 +12,10 @@ const ProductItem = ({ id, image, name, price }) => {
           <img className='w-full h-auto hover:scale-110 transition ease-in-out' src={image[0]} alt="" />
         </div>
       <p className='pt-3 pb-1 text-sm'>{name}</p>
-      <p className='text-sm font-medium text-[#C0001A]'>{formatPrice(price)}</p>
+      {token
+        ? <p className='text-sm font-medium text-[#C0001A]'>{formatPrice(price)}</p>
+        : <p className='text-sm text-[#8C8C8C]'>התחבר לצפייה במחיר</p>
+      }
     </Link>
   )
 }

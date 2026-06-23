@@ -61,7 +61,10 @@ const Product = () => {
         {/* Product Info */}
         <div className='flex-1'>
           <h1 className='font-medium text-2xl mt-2'>{productData.name}</h1>
-          <p className='mt-5 text-3xl font-medium text-[#C0001A]'>{formatPrice(productData.price)}</p>
+          {token
+            ? <p className='mt-5 text-3xl font-medium text-[#C0001A]'>{formatPrice(productData.price)}</p>
+            : <p className='mt-5 text-lg text-[#8C8C8C]'>התחבר לצפייה במחיר</p>
+          }
           <p className='mt-5 text-[#8C8C8C] md:w-4/5 leading-relaxed'>{productData.description}</p>
 
           <hr className='mt-8 sm:w-4/5 border-[#F5F5F0]' />
