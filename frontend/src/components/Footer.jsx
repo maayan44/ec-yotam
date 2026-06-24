@@ -45,15 +45,16 @@ const Footer = () => {
 
       <div className='px-8'>
         <hr className='border-white/10' />
-        <p className='py-5 text-xs text-center text-white/30'>
+        <p className='py-5 sm:py-5 pb-8 sm:pb-5 text-xs text-center text-white/30'>
           © 2026 Interproduct.co.il — כל הזכויות שמורות
-          <span className='hidden sm:inline'>&nbsp;·&nbsp;</span>{' '}
+          <span className='hidden sm:inline'>&nbsp;·&nbsp;</span>
           <a
             href='https://ciano-webs.vercel.app/'
             target='_blank'
             rel='noopener noreferrer'
+            className='block sm:inline mt-2 sm:mt-0'
           >
-            <img src={assets.cianowebs_logo} alt='Ciano Webs' className='h-5 inline-block opacity-30 hover:opacity-60 transition-opacity align-middle mb-0.5' />
+            <img src={assets.cianowebs_logo} alt='Ciano Webs' className='h-5 inline-block opacity-30 hover:opacity-60 transition-opacity align-middle mb-0.5 mx-auto' />
           </a>
         </p>
       </div>
