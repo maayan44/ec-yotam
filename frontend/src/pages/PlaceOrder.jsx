@@ -46,11 +46,9 @@ const PlaceOrder = () => {
       }
 
       let orderData = {
-        address: { ...formData, state: '', zipcode: '', country: 'ישראל' },
+        address: formData,
         items: orderItems,
         amount: getCartAmount() + delivery_fee,
-        paymentMethod: 'cod',
-        payment: false
       }
 
       const response = await axios.post(backendUrl + '/api/order/place', orderData, { headers: { token } })
@@ -123,7 +121,6 @@ const PlaceOrder = () => {
               <p>סכום מינימום להזמנה: ₪{MIN_ORDER}</p>
               <p>חסר ₪{(MIN_ORDER - cartAmount).toFixed(2)} להשלמת ההזמנה</p>
 
-              {/* Thin separation line */}
               <hr className='border-t border-[#C0001A] my-2' />
 
               <p>למשלוחים מתחת ל1499₪ יש ליצור קשר טלפוני</p>

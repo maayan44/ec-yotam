@@ -11,7 +11,7 @@ const Sidebar = () => {
                     <p className='hidden md:block'>הוסף מוצר</p>
                 </NavLink>
                 <NavLink className='flex items-center justify-center md:justify-start gap-3 border border-[#C6C7C3] border-r-0 px-3 py-2 md:rounded-l' to="/list">
-                    <img className='w-5 h-5 shrink-0' src={assets.order_icon} alt="" />
+                    <img className='w-5 h-5 shrink-0' src={assets.parcel_icon} alt="" />
                     <p className='hidden md:block'>רשימת מוצרים</p>
                 </NavLink>
                 <NavLink className='flex items-center justify-center md:justify-start gap-3 border border-[#C6C7C3] border-r-0 px-3 py-2 md:rounded-l' to="/orders">
