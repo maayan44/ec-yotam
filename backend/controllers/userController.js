@@ -14,17 +14,16 @@ const loginUser = async (req, res) => {
         const user = await userModel.findOne({ email });
 
         if (!user) {
-            return res.json({ success: false, message: "אימייל או סיסמה שגויים" })
+            return res.json({ success: false, message: "כתובת האימייל אינה מזוהה במערכת. אם נרשמת לאחרונה, ייתכן שהבקשה טרם אושרה." })
         }
 
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) {
-            return res.json({ success: false, message: "אימייל או סיסמה שגויים" })
+            return res.json({ success: false, message: "הסיסמה שגויה. אנא נסה שנית." })
         }
 
-        // Check if account is approved
         if (!user.isApproved) {
-            return res.json({ success: false, message: "החשבון ממתין לאישור מנהל. נא לנסות שוב מאוחר יותר." })
+            return res.json({ success: false, message: "בקשת ההצטרפות שלך התקבלה ונמצאת בבדיקה. תוכל להתחבר לאחר אישור הצוות. לבירורים צור קשר איתנו." })
         }
 
         const token = createToken(user._id)
@@ -41,34 +40,28 @@ const registerUser = async (req, res) => {
     try {
         const { name, email, password, phone, businessName, businessAddress, city } = req.body;
 
-        // Check if user already exists
         const exists = await userModel.findOne({ email })
         if (exists) {
-            return res.json({ success: false, message: "משתמש עם אימייל זה כבר קיים" })
+            return res.json({ success: false, message: "משתמש עם אימייל זה כבר קיים במערכת" })
         }
 
-        // Check if phone already registered
         const phoneExists = await userModel.findOne({ phone })
         if (phoneExists) {
             return res.json({ success: false, message: "מספר טלפון זה כבר רשום במערכת" })
         }
 
-        // Validate email
         if (!validator.isEmail(email)) {
             return res.json({ success: false, message: "נא להזין כתובת אימייל תקינה" })
         }
 
-        // Validate password length
         if (password.length < 8) {
             return res.json({ success: false, message: "הסיסמה חייבת להכיל לפחות 8 תווים" })
         }
 
-        // Validate phone — 10 digits only
         if (!/^\d{10}$/.test(phone)) {
             return res.json({ success: false, message: "מספר הטלפון חייב להכיל בדיוק 10 ספרות" })
         }
 
-        // Hash password
         const salt = await bcrypt.genSalt(10)
         const hashedPassword = await bcrypt.hash(password, salt)
 
@@ -85,8 +78,7 @@ const registerUser = async (req, res) => {
 
         await newUser.save()
 
-        // Don't return token — user must wait for approval
-        res.json({ success: true, message: "ההרשמה הושלמה! החשבון ממתין לאישור מנהל." })
+        res.json({ success: true })
 
     } catch (error) {
         console.log(error);

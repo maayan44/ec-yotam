@@ -80,16 +80,16 @@ const Cart = () => {
               </div>
 
               <div className='flex items-center gap-0' dir="rtl">
-                <div className='group relative flex items-center justify-center h-9 w-16 bg-white border border-[#1A1A1A] rounded-full cursor-default select-none overflow-hidden'>
+                <div className='relative flex items-center justify-center h-9 w-16 bg-white border border-[#1A1A1A] rounded-full cursor-default select-none overflow-hidden'>
                   <div className='flex items-center gap-1'>
                     <span className='text-sm font-medium text-[#1A1A1A]'>{item.quantity}</span>
-                    <div className='flex flex-col opacity-0 group-hover:opacity-100 transition-opacity'>
+                    <div className='flex flex-col'>
                       <button
                         onMouseDown={(e) => {
                           e.preventDefault()
                           updateQuantity(item._id, item.size, item.quantity + 1)
                         }}
-                        className='flex items-center justify-center w-5 h-4 text-[10px] text-[#1A1A1A] hover:text-[#C0001A] transition-colors leading-none cursor-pointer'
+                        className='flex items-center justify-center w-5 h-4 text-[10px] text-[#8C8C8C] hover:text-[#C0001A] transition-colors leading-none cursor-pointer'
                         style={{ lineHeight: 1 }}
                       >
                         ▲
@@ -99,7 +99,7 @@ const Cart = () => {
                           e.preventDefault()
                           if (item.quantity > 1) updateQuantity(item._id, item.size, item.quantity - 1)
                         }}
-                        className='flex items-center justify-center w-5 h-4 text-[10px] text-[#1A1A1A] hover:text-[#C0001A] transition-colors leading-none cursor-pointer'
+                        className='flex items-center justify-center w-5 h-4 text-[10px] text-[#8C8C8C] hover:text-[#C0001A] transition-colors leading-none cursor-pointer'
                         style={{ lineHeight: 1 }}
                       >
                         ▼

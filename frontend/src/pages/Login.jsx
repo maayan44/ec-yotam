@@ -14,9 +14,12 @@ const Login = () => {
   const [businessName, setBusinessName] = useState('')
   const [businessAddress, setBusinessAddress] = useState('')
   const [city, setCity] = useState('')
+  const [registered, setRegistered] = useState(false)
+  const [loginError, setLoginError] = useState('')
 
   const onSubmitHandler = async (event) => {
     event.preventDefault();
+    setLoginError('')
 
     try {
       if (currentState === 'register') {
@@ -24,7 +27,7 @@ const Login = () => {
           name, email, password, phone, businessName, businessAddress, city
         })
         if (response.data.success) {
-          toast.success('ההרשמה הושלמה! החשבון ממתין לאישור מנהל.')
+          setRegistered(true)
           setCurrentState('login')
         } else {
           toast.error(response.data.message)
@@ -36,7 +39,7 @@ const Login = () => {
           setToken(response.data.token)
           localStorage.setItem('token', response.data.token)
         } else {
-          toast.error(response.data.message)
+          setLoginError(response.data.message)
         }
       }
 
@@ -53,6 +56,7 @@ const Login = () => {
   useEffect(() => {
     setName(''); setEmail(''); setPassword('');
     setPhone(''); setBusinessName(''); setBusinessAddress(''); setCity('');
+    setLoginError('');
   }, [currentState]);
 
   return (
@@ -64,6 +68,23 @@ const Login = () => {
         </p>
         <hr className='border-none h-[1.5px] w-8 bg-[#C0001A]' />
       </div>
+
+      {/* Post-registration success notice */}
+      {registered && (
+        <div className='w-full bg-[#F5F5F0] border border-[#A3A5A1] rounded px-4 py-4 text-center text-sm text-[#1A1A1A]' dir="rtl">
+          <p className='font-medium mb-1'>✅ הפרטים התקבלו בהצלחה</p>
+          <p className='text-[#8C8C8C] leading-relaxed'>
+            בקשת ההצטרפות שלך נמצאת בבדיקה. לאחר אישור הצוות תוכל להתחבר עם כתובת האימייל והסיסמה שבחרת.
+          </p>
+        </div>
+      )}
+
+      {/* Inline login error */}
+      {loginError && (
+        <div className='w-full bg-[#fff5f5] border border-[#C0001A] rounded px-4 py-4 text-center text-sm text-[#C0001A]' dir="rtl">
+          <p className='leading-relaxed'>{loginError}</p>
+        </div>
+      )}
 
       {currentState === 'register' && (
         <>
