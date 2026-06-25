@@ -86,20 +86,20 @@ const Product = () => {
               הוסף לסל
             </button>
 
-            <div className='group relative flex items-center justify-center h-11 w-20 bg-white border border-[#1A1A1A] rounded-l-full cursor-default select-none overflow-hidden'>
+            <div className='relative flex items-center justify-center h-11 w-20 bg-white border border-[#1A1A1A] rounded-l-full cursor-default select-none overflow-hidden'>
               <div className='flex items-center gap-1'>
                 <span className='text-sm font-medium text-[#1A1A1A]'>{quantity}</span>
-                <div className='flex flex-col opacity-0 group-hover:opacity-100 transition-opacity'>
+                <div className='flex flex-col'>
                   <button
                     onMouseDown={(e) => { e.preventDefault(); setQuantity(prev => prev + 1) }}
-                    className='flex items-center justify-center w-5 h-5 text-[10px] text-[#1A1A1A] hover:text-[#C0001A] transition-colors leading-none cursor-pointer'
+                    className='flex items-center justify-center w-5 h-5 text-[10px] text-[#8C8C8C] hover:text-[#C0001A] transition-colors leading-none cursor-pointer'
                     style={{ lineHeight: 1 }}
                   >
                     ▲
                   </button>
                   <button
                     onMouseDown={(e) => { e.preventDefault(); setQuantity(prev => Math.max(1, prev - 1)) }}
-                    className='flex items-center justify-center w-5 h-5 text-[10px] text-[#1A1A1A] hover:text-[#C0001A] transition-colors leading-none cursor-pointer'
+                    className='flex items-center justify-center w-5 h-5 text-[10px] text-[#8C8C8C] hover:text-[#C0001A] transition-colors leading-none cursor-pointer'
                     style={{ lineHeight: 1 }}
                   >
                     ▼
