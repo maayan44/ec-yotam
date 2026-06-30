@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useEffect, useState, useMemo } from "react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import axios from 'axios'
@@ -52,7 +52,7 @@ const ShopContextProvider = (props) => {
         }
     }
 
-    const getCartCount = () => {
+    const getCartCount = useMemo(() => {
         let totalCount = 0;
         for (const items in cartItems) {
             for (const item in cartItems[items]) {
@@ -66,7 +66,7 @@ const ShopContextProvider = (props) => {
             }
         }
         return totalCount;
-    }
+    }, [cartItems])
 
     const updateQuantity = async (itemId, size, quantity) => {
         let cartData = structuredClone(cartItems);
@@ -84,7 +84,7 @@ const ShopContextProvider = (props) => {
         }
     }
 
-    const getCartAmount = () => {
+    const getCartAmount = useMemo(() => {
         let totalAmount = 0;
         for (const items in cartItems) {
             let itemInfo = products.find((product) => product._id === items);
@@ -99,7 +99,7 @@ const ShopContextProvider = (props) => {
             }
         }
         return totalAmount;
-    }
+    }, [cartItems, products])
 
     const getProductsData = async () => {
         try {
@@ -151,7 +151,7 @@ const ShopContextProvider = (props) => {
 
     const value = {
         products, currency,
-        delivery_fee: getCartAmount() >= FREE_DELIVERY_THRESHOLD ? 0 : DELIVERY_FEE,
+        delivery_fee: getCartAmount >= FREE_DELIVERY_THRESHOLD ? 0 : DELIVERY_FEE,
         MIN_ORDER,
         search, setSearch, showSearch, setShowSearch,
         cartItems, addToCart, setCartItems,

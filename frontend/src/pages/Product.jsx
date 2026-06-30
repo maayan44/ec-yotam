@@ -7,7 +7,7 @@ import RelatedProducts from '../components/RelatedProducts';
 const Product = () => {
 
   const { productId } = useParams();
-  const { products, formatPrice, addToCart, token, navigate } = useContext(ShopContext);
+  const { products, formatPrice, addToCart, token, navigate, productsLoading } = useContext(ShopContext);
   const [productData, setProductData] = useState(false);
   const [image, setImage] = useState('')
   const [quantity, setQuantity] = useState(1)
@@ -26,6 +26,21 @@ const Product = () => {
     fetchProductData();
     setQuantity(1)
   }, [productId, products])
+
+  if (productsLoading) {
+    return (
+      <div className='flex flex-col items-center justify-center py-24 gap-4'>
+        <div
+          className='w-10 h-10 rounded-full border-2 border-[#F5F5F0] border-t-[#C0001A]'
+          style={{ animation: 'spin 0.75s linear infinite' }}
+        />
+        <p className='text-sm text-[#8C8C8C]' style={{ fontFamily: 'Heebo, sans-serif' }}>
+          טוען מוצר...
+        </p>
+        <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
+      </div>
+    )
+  }
 
   return productData ? (
     <div className='border-t-2 pt-10 transition-opacity ease-in duration-500 opacity-100'>
