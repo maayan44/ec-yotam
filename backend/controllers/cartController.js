@@ -57,7 +57,7 @@ const updateCart = async (req, res) => {
 // Get user cart data
 const getUserCart = async (req, res) => {
     try {
-        const { userId } = req.body
+        const { userId } = req.query
 
         const cart = await cartModel.findOne({ userId })
         res.json({ success: true, cartData: cart ? cart.items : {} })

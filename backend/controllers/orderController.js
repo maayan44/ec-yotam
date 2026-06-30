@@ -45,7 +45,7 @@ const allOrders = async (req, res) => {
 // Returns all orders belonging to the logged-in user. Used by the Orders page.
 const userOrders = async (req, res) => {
     try {
-        const { userId } = req.body
+        const { userId } = req.query
         const orders = await orderModel.find({ userId })
         res.json({ success: true, orders })
     } catch (error) {
