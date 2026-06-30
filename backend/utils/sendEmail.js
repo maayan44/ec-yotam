@@ -1,15 +1,15 @@
 import nodemailer from 'nodemailer'
 
+const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS
+    }
+})
+
 const sendOrderEmail = async (orderData) => {
     try {
-        const transporter = nodemailer.createTransport({
-            service: 'gmail',
-            auth: {
-                user: process.env.EMAIL_USER,
-                pass: process.env.EMAIL_PASS
-            }
-        })
-
         const itemsList = orderData.items
             .map(item => `<tr>
                 <td style="padding:8px;border-bottom:1px solid #eee">${item.name}</td>
