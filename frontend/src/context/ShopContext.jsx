@@ -6,7 +6,7 @@ import axios from 'axios'
 export const ShopContext = createContext();
 
 const ShopContextProvider = (props) => {
-    
+
     const currency = '₪';
     const MIN_ORDER = 1499;
     const FREE_DELIVERY_THRESHOLD = 1699;
@@ -137,17 +137,11 @@ const ShopContextProvider = (props) => {
 
     useEffect(() => {
         const storedToken = localStorage.getItem('token');
-        if (!token && storedToken) {
+        if (storedToken) {
             setToken(storedToken);
             getUserCart(storedToken);
         }
     }, []);
-
-    useEffect(() => {
-        if (token) {
-            getUserCart(token);
-        }
-    }, [token]);
 
     const value = {
         products, currency,
