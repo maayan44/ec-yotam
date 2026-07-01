@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /cart
+Disallow: /place-order
+Disallow: /orders
+Disallow: /login
+
+Sitemap: https://interproduct.co.il/sitemap.xml
