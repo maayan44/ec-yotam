@@ -1,4 +1,8 @@
 import nodemailer from 'nodemailer'
+import he from 'he'
+
+// Sanitize user-supplied strings before injecting into email HTML
+const s = (str) => he.escape(String(str ?? ''))
 
 const transporter = nodemailer.createTransport({
     service: 'gmail',
@@ -12,9 +16,9 @@ const sendOrderEmail = async (orderData) => {
     try {
         const itemsList = orderData.items
             .map(item => `<tr>
-                <td style="padding:8px;border-bottom:1px solid #eee">${item.name}</td>
-                <td style="padding:8px;border-bottom:1px solid #eee;text-align:center">${item.quantity}</td>
-                <td style="padding:8px;border-bottom:1px solid #eee;text-align:left">${item.price} ₪</td>
+                <td style="padding:8px;border-bottom:1px solid #eee">${s(item.name)}</td>
+                <td style="padding:8px;border-bottom:1px solid #eee;text-align:center">${s(item.quantity)}</td>
+                <td style="padding:8px;border-bottom:1px solid #eee;text-align:left">${s(item.price)} ₪</td>
             </tr>`)
             .join('')
 
@@ -36,19 +40,19 @@ const sendOrderEmail = async (orderData) => {
                         <table style="width:100%;margin-bottom:24px">
                             <tr>
                                 <td style="padding:6px 0;color:#8C8C8C;width:140px">שם מלא:</td>
-                                <td style="padding:6px 0;font-weight:bold">${orderData.address.firstName} ${orderData.address.lastName}</td>
+                                <td style="padding:6px 0;font-weight:bold">${s(orderData.address.firstName)} ${s(orderData.address.lastName)}</td>
                             </tr>
                             <tr>
                                 <td style="padding:6px 0;color:#8C8C8C">אימייל:</td>
-                                <td style="padding:6px 0">${orderData.address.email}</td>
+                                <td style="padding:6px 0">${s(orderData.address.email)}</td>
                             </tr>
                             <tr>
                                 <td style="padding:6px 0;color:#8C8C8C">טלפון:</td>
-                                <td style="padding:6px 0">${orderData.address.phone}</td>
+                                <td style="padding:6px 0">${s(orderData.address.phone)}</td>
                             </tr>
                             <tr>
                                 <td style="padding:6px 0;color:#8C8C8C">כתובת:</td>
-                                <td style="padding:6px 0">${orderData.address.street}, ${orderData.address.city}</td>
+                                <td style="padding:6px 0">${s(orderData.address.street)}, ${s(orderData.address.city)}</td>
                             </tr>
                         </table>
 
@@ -67,7 +71,7 @@ const sendOrderEmail = async (orderData) => {
                         </table>
 
                         <div style="background:#1A1A1A;color:white;padding:16px;border-radius:8px;text-align:left">
-                            <span style="font-size:18px;font-weight:bold">סה"כ לתשלום: ${orderData.amount} ₪</span>
+                            <span style="font-size:18px;font-weight:bold">סה"כ לתשלום: ${s(orderData.amount)} ₪</span>
                         </div>
 
                         <p style="color:#8C8C8C;font-size:12px;margin-top:24px;text-align:center">
