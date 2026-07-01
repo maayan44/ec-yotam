@@ -1,6 +1,25 @@
 @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600&family=Heebo:wght@400;500;700;800&display=swap');
 @import "tailwindcss";
 
+/* Skip link — visually hidden until focused */
+.skip-link {
+    position: absolute;
+    top: -100%;
+    right: 0;
+    background: #C0001A;
+    color: white;
+    padding: 8px 16px;
+    font-size: 14px;
+    font-family: 'Heebo', sans-serif;
+    z-index: 9999;
+    text-decoration: none;
+    border-radius: 0 0 4px 4px;
+}
+
+.skip-link:focus {
+    top: 0;
+}
+
 a.active hr {
     display: block;
 }
@@ -47,8 +66,9 @@ h6,
     0% {
         transform: translateX(0);
     }
+
     100% {
-        transform: translateX(-25%); 
+        transform: translateX(-25%);
     }
 }
 

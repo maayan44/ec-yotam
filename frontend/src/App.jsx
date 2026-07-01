@@ -11,7 +11,7 @@ import PlaceOrder from './pages/PlaceOrder'
 import Orders from './pages/Orders'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import PromoBanner from './components/PromoBanner'
 import ScrollToTop from './components/ScrollToTop'
@@ -21,10 +21,11 @@ import Privacy from './pages/Privacy'
 const App = () => {
   return (
     <div className='w-full min-h-screen'>
+      <a href='#main-content' className='skip-link'>דלג לתוכן הראשי</a>
       <ScrollToTop />
       <PromoBanner />
       <Navbar />
-      <div className='px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw] pt-[140px]'>
+      <main id='main-content' className='px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw] pt-[140px]'>
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/collection' element={<Archive />} />
@@ -38,8 +39,9 @@ const App = () => {
           <Route path='*' element={<NotFound />} />
           <Route path='/privacy' element={<Privacy />} />
         </Routes>
-      </div>
+      </main>
       <Footer />
+      <ToastContainer />
     </div>
   )
 }
