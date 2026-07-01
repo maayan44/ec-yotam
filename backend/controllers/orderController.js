@@ -1,5 +1,5 @@
 import orderModel from "../models/orderModel.js";
-import userModel from "../models/userModel.js";
+import cartModel from "../models/cartModel.js";
 import sendOrderEmail from "../utils/sendEmail.js";
 
 // Place Order
@@ -17,7 +17,7 @@ const placeOrder = async (req, res) => {
         }
         const newOrder = new orderModel(orderData)
         await newOrder.save()
-        await userModel.findByIdAndUpdate(userId, { cartData: {} })
+        await cartModel.findOneAndUpdate({ userId }, { items: {} })
 
         await sendOrderEmail({ items, amount, address })
 
