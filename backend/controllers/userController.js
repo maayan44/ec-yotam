@@ -4,7 +4,7 @@ import bcrypt from "bcrypt"
 import jwt from 'jsonwebtoken'
 
 const createToken = (id) => {
-    return jwt.sign({ id }, process.env.JWT_SECRET)
+    return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: '30d' }) // Every user logout after 30d
 }
 
 // Route for user login
