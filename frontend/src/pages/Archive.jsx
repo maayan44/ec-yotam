@@ -4,6 +4,7 @@ import { ShopContext } from '../context/ShopContext'
 import { assets } from '../assets/assets/assets.js'
 import Title from '../components/Title'
 import ProductItem from '../components/ProductItem'
+import { Helmet } from 'react-helmet-async'
 
 const Archive = () => {
   const { products, search, showSearch, productsLoading } = useContext(ShopContext);
@@ -69,6 +70,12 @@ const Archive = () => {
 
   return (
     <div className='flex flex-col sm:flex-row gap-1 sm:gap-10 pt-10 border-t border-t-[#A3A5A1]'>
+
+      {/* Dynamic page title and meta for SEO */}
+      <Helmet>
+        <title>קטלוג מוצרים | Interproduct</title>
+        <meta name="description" content="כל מוצרי טיפוח הרכב של אינטרפרודקט. סנן לפי קטגוריה ומצא את המוצר המתאים לך." />
+      </Helmet>
 
       {/* Filter Options */}
       <div className='min-w-60'>

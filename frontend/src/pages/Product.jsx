@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 import { ShopContext } from '../context/ShopContext';
 import { toast } from 'react-toastify';
 import RelatedProducts from '../components/RelatedProducts';
+import { Helmet } from 'react-helmet-async'
 
 const Product = () => {
 
@@ -27,6 +28,7 @@ const Product = () => {
     setQuantity(1)
   }, [productId, products])
 
+  // Loading state while products are being fetched
   if (productsLoading) {
     return (
       <div className='flex flex-col items-center justify-center py-24 gap-4'>
@@ -45,6 +47,14 @@ const Product = () => {
   return productData ? (
     <div className='border-t-2 pt-10 transition-opacity ease-in duration-500 opacity-100'>
 
+      {/* Dynamic page title and meta per product for SEO */}
+      <Helmet>
+        <title>{productData.name} | Interproduct</title>
+        <meta name="description" content={productData.description.slice(0, 155)} />
+        <meta property="og:title" content={`${productData.name} | Interproduct`} />
+        <meta property="og:description" content={productData.description.slice(0, 155)} />
+      </Helmet>
+
       <button
         onClick={() => navigate('/collection')}
         className='mb-6 flex items-center gap-2 text-sm text-[#8C8C8C] hover:text-[#C0001A] transition-colors'
@@ -55,7 +65,7 @@ const Product = () => {
 
       <div className='flex gap-12 flex-col sm:flex-row'>
 
-        {/* Images */}
+        {/* Product images: thumbnails + main display */}
         <div className='flex-1 flex flex-col-reverse gap-3 sm:flex-row'>
           <div className='flex sm:flex-col overflow-x-auto sm:overflow-y-scroll justify-between sm:justify-normal sm:w-[18.7%] w-full'>
             {productData.image.map((item, index) => (
@@ -64,16 +74,16 @@ const Product = () => {
                 src={item}
                 key={index}
                 className='w-[24%] sm:w-full sm:mb-3 flex-shrink-0 cursor-pointer border hover:border-[#C0001A] transition-colors'
-                alt=""
+                alt={`תמונה ${index + 1} של ${productData.name}`}
               />
             ))}
           </div>
           <div className='w-full sm:w-[80%]'>
-            <img className='w-full h-auto' src={image} alt="" />
+            <img className='w-full h-auto' src={image} alt={productData.name} />
           </div>
         </div>
 
-        {/* Product Info */}
+        {/* Product info: name, price, description, quantity, add to cart */}
         <div className='flex-1'>
           <h1 className='font-medium text-2xl mt-2'>{productData.name}</h1>
           {token
@@ -84,7 +94,7 @@ const Product = () => {
 
           <hr className='mt-8 sm:w-4/5 border-[#F5F5F0]' />
 
-          {/* Quantity + Add to cart */}
+          {/* Quantity stepper + add to cart button */}
           <div className='mt-6 flex items-center gap-0' dir="rtl">
             <button
               onClick={() => {
@@ -133,6 +143,7 @@ const Product = () => {
         </div>
       </div>
 
+      {/* Product description tab */}
       <div className='mt-20'>
         <div className='flex'>
           <b className='border px-5 py-3 text-sm bg-[#1A1A1A] text-white'>תיאור המוצר</b>

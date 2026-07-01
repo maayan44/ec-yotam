@@ -1,10 +1,17 @@
 import React from 'react'
 import Title from '../components/Title'
 import { assets } from '../assets/assets/assets.js';
+import { Helmet } from 'react-helmet-async'
 
 const About = () => {
   return (
     <div>
+
+      {/* Dynamic page title and meta for SEO */}
+      <Helmet>
+        <title>צור קשר | Interproduct</title>
+        <meta name="description" content="צרו קשר עם צוות אינטרפרודקט. טלפון: 053-594-4674 או במייל." />
+      </Helmet>
 
       <div className='text-2xl text-center pt-8 border-t'>
         <Title text1={'אודות'} text2={'החברה'} />
