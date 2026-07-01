@@ -1,25 +1,51 @@
 import orderModel from "../models/orderModel.js";
 import cartModel from "../models/cartModel.js";
+import productModel from "../models/productModel.js";
 import sendOrderEmail from "../utils/sendEmail.js";
 
 // Place Order
 // Called when a user submits an order from the frontend.
+// Amount is recalculated server-side from DB prices — never trusted from client.
 // Saves the order, clears the user's cart, and sends an email notification to admin.
 const placeOrder = async (req, res) => {
     try {
-        const { userId, items, amount, address } = req.body;
+        const { userId, items, address } = req.body
+
+        // Recalculate order amount from DB prices — ignore client-sent amount
+        let calculatedAmount = 0
+        for (const item of items) {
+            const product = await productModel.findById(item._id)
+            if (!product) {
+                return res.json({ success: false, message: `מוצר לא נמצא: ${item._id}` })
+            }
+            calculatedAmount += product.price * item.quantity
+        }
+
+        // Apply delivery fee server-side
+        const FREE_DELIVERY_THRESHOLD = 1699
+        const DELIVERY_FEE = 200
+        const deliveryFee = calculatedAmount >= FREE_DELIVERY_THRESHOLD ? 0 : DELIVERY_FEE
+        const totalAmount = calculatedAmount + deliveryFee
+
+        // Enforce minimum order server-side
+        const MIN_ORDER = 1499
+        if (calculatedAmount < MIN_ORDER) {
+            return res.json({ success: false, message: `סכום מינימלי להזמנה הוא ₪${MIN_ORDER}` })
+        }
+
         const orderData = {
             userId,
             items,
             address,
-            amount,
+            amount: totalAmount,
             date: Date.now()
         }
+
         const newOrder = new orderModel(orderData)
         await newOrder.save()
         await cartModel.findOneAndUpdate({ userId }, { items: {} })
 
-        await sendOrderEmail({ items, amount, address })
+        await sendOrderEmail({ items, amount: totalAmount, address })
 
         res.json({ success: true, message: "ההזמנה התקבלה בהצלחה" })
 
