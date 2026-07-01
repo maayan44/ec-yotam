@@ -3,14 +3,22 @@ import { Link } from 'react-router-dom'
 
 const PromoBanner = () => {
   return (
-    <div className='fixed top-0 left-0 right-0 z-[60] w-full bg-[#C0001A] text-white py-2 overflow-hidden' style={{direction: 'ltr'}}>
-      <div style={{
-        display: 'flex',
-        width: 'max-content',
-        animation: 'bannerScroll 22s linear infinite',
-      }}>
-        {/* Duplicated 4 times for seamless loop */}
-        {[0,1,2,3].map((i) => (
+    <div
+      className='fixed top-0 left-0 right-0 z-[60] w-full bg-[#C0001A] text-white py-2 overflow-hidden'
+      style={{ direction: 'ltr' }}
+      aria-label="משלוח חינם בקנייה מעל ₪1699 · מוצרים במחיר סיטונאי ובלעדי"
+      role="marquee"
+    >
+      {/* Content duplicated 4 times for seamless scroll loop — hidden from screen readers */}
+      <div
+        aria-hidden="true"
+        style={{
+          display: 'flex',
+          width: 'max-content',
+          animation: 'bannerScroll 22s linear infinite',
+        }}
+      >
+        {[0, 1, 2, 3].map((i) => (
           <div key={i} style={{ display: 'flex', alignItems: 'center', flexShrink: 0 }}>
             <Link to='/collection' className='hover:underline text-sm font-medium' style={{ padding: '0 48px', whiteSpace: 'nowrap' }}>
               משלוח חינם בקנייה מעל ₪1699

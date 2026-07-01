@@ -7,6 +7,7 @@ export const ShopContext = createContext();
 
 const ShopContextProvider = (props) => {
 
+    // Business constants — update here if pricing rules change
     const currency = '₪';
     const MIN_ORDER = 1499;
     const FREE_DELIVERY_THRESHOLD = 1699;
@@ -15,6 +16,7 @@ const ShopContextProvider = (props) => {
     const backendUrl = import.meta.env.VITE_BACKEND_URL
     const formatPrice = (amount) => `${Number(amount).toFixed(2)} ₪`
 
+    // Global state
     const [search, setSearch] = useState('');
     const [showSearch, setShowSearch] = useState(false);
     const [cartItems, setCartItems] = useState({});
@@ -23,6 +25,7 @@ const ShopContextProvider = (props) => {
     const [token, setToken] = useState('')
     const navigate = useNavigate();
 
+    // Add item to cart — optimistic UI update then sync to backend
     const addToCart = async (itemId, size, quantity = 1) => {
         if (!token) {
             toast.error('יש להתחבר כדי להוסיף מוצרים לסל')
@@ -52,6 +55,7 @@ const ShopContextProvider = (props) => {
         }
     }
 
+    // Total item count across all cart entries — memoized to avoid recalculating on every render
     const getCartCount = useMemo(() => {
         let totalCount = 0;
         for (const items in cartItems) {
@@ -60,14 +64,13 @@ const ShopContextProvider = (props) => {
                     if (cartItems[items][item] > 0) {
                         totalCount += cartItems[items][item];
                     }
-                } catch (error) {
-
-                }
+                } catch (error) { }
             }
         }
         return totalCount;
     }, [cartItems])
 
+    // Update item quantity — passing 0 removes the item
     const updateQuantity = async (itemId, size, quantity) => {
         let cartData = structuredClone(cartItems);
         cartData[itemId][size] = quantity;
@@ -76,7 +79,6 @@ const ShopContextProvider = (props) => {
         if (token) {
             try {
                 await axios.post(backendUrl + '/api/cart/update', { itemId, size, quantity }, { headers: { token } })
-
             } catch (error) {
                 console.log(error)
                 toast.error(error.message)
@@ -84,6 +86,7 @@ const ShopContextProvider = (props) => {
         }
     }
 
+    // Total cart value in ₪ — memoized, recalculates only when cart or products change
     const getCartAmount = useMemo(() => {
         let totalAmount = 0;
         for (const items in cartItems) {
@@ -101,6 +104,7 @@ const ShopContextProvider = (props) => {
         return totalAmount;
     }, [cartItems, products])
 
+    // Fetch all products from backend — called once on mount
     const getProductsData = async () => {
         try {
             setProductsLoading(true)
@@ -118,23 +122,25 @@ const ShopContextProvider = (props) => {
         }
     }
 
+    // Fetch cart from backend using stored token
     const getUserCart = async (token) => {
         try {
             const response = await axios.get(backendUrl + '/api/cart/get', { headers: { token } })
             if (response.data.success) {
                 setCartItems(response.data.cartData)
             }
-
         } catch (error) {
             console.log(error)
             toast.error(error.message)
         }
     }
 
+    // Load products on mount
     useEffect(() => {
         getProductsData()
     }, [])
 
+    // Restore session from localStorage on mount — single effect avoids double cart fetch
     useEffect(() => {
         const storedToken = localStorage.getItem('token');
         if (storedToken) {
@@ -143,6 +149,7 @@ const ShopContextProvider = (props) => {
         }
     }, []);
 
+    // Delivery fee: free above threshold, otherwise fixed fee
     const value = {
         products, currency,
         delivery_fee: getCartAmount >= FREE_DELIVERY_THRESHOLD ? 0 : DELIVERY_FEE,
