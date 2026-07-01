@@ -27,27 +27,29 @@ const Categories = () => {
         </p>
       </div>
 
-      <div className='grid grid-cols-3 sm:grid-cols-5 gap-6 justify-items-center'>
+      <ul className='grid grid-cols-3 sm:grid-cols-5 gap-6 justify-items-center list-none' role="list">
         {categories.map((cat, i) => (
-          <div
-            key={i}
-            onClick={() => handleClick(cat.value)}
-            className='flex flex-col items-center justify-center gap-3 cursor-pointer group'
-          >
-            {/* Circle with thin red border — always visible */}
-            <div className='w-28 h-28 sm:w-36 sm:h-36 rounded-full border border-[#C0001A]/30 group-hover:border-[#C0001A]/60 transition-all duration-300 flex items-center justify-center bg-white'>
-              <img
-                src={cat.icon}
-                alt={cat.name}
-                className='w-16 h-16 sm:w-20 sm:h-20 object-contain'
-              />
-            </div>
-            <p className='font-semibold text-[#1A1A1A] text-sm text-center'>
-              {cat.name}
-            </p>
-          </div>
+          <li key={i}>
+            <button
+              onClick={() => handleClick(cat.value)}
+              className='flex flex-col items-center justify-center gap-3 cursor-pointer group bg-transparent border-none'
+              aria-label={`סנן לפי קטגוריה: ${cat.name}`}
+            >
+              <div className='w-28 h-28 sm:w-36 sm:h-36 rounded-full border border-[#C0001A]/30 group-hover:border-[#C0001A]/60 transition-all duration-300 flex items-center justify-center bg-white'>
+                <img
+                  src={cat.icon}
+                  alt=""
+                  aria-hidden="true"
+                  className='w-16 h-16 sm:w-20 sm:h-20 object-contain'
+                />
+              </div>
+              <p className='font-semibold text-[#1A1A1A] text-sm text-center'>
+                {cat.name}
+              </p>
+            </button>
+          </li>
         ))}
-      </div>
+      </ul>
     </div>
   )
 }

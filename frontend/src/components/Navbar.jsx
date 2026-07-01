@@ -4,25 +4,29 @@ import { Link, NavLink } from 'react-router-dom'
 import { ShopContext } from '../context/ShopContext.jsx';
 
 const Navbar = () => {
+
+    // State
     const [visible, setVisible] = useState(false);
     const [scrolled, setScrolled] = useState(false);
     const [profileOpen, setProfileOpen] = useState(false);
     const { search, setSearch, showSearch, setShowSearch, getCartCount, navigate, token, setToken, setCartItems } = useContext(ShopContext);
     const menuRef = useRef(null);
 
+    // Scroll shrink effect
     useEffect(() => {
         const handleScroll = () => setScrolled(window.scrollY > 40);
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
+    // Close profile dropdown on outside click 
     useEffect(() => {
         const handleClickOutside = () => setProfileOpen(false)
         if (profileOpen) document.addEventListener('click', handleClickOutside)
         return () => document.removeEventListener('click', handleClickOutside)
     }, [profileOpen]);
 
-    // Lock body scroll and trap focus when mobile menu is open
+    //  Mobile menu: lock scroll + focus first item 
     useEffect(() => {
         if (visible) {
             document.body.style.overflow = 'hidden'
@@ -33,7 +37,7 @@ const Navbar = () => {
         return () => { document.body.style.overflow = '' }
     }, [visible]);
 
-    // Close mobile menu on Escape key
+    // Close menus on Escape key
     useEffect(() => {
         const handleKeyDown = (e) => {
             if (e.key === 'Escape') {
@@ -45,6 +49,7 @@ const Navbar = () => {
         return () => document.removeEventListener('keydown', handleKeyDown)
     }, []);
 
+    // Logout: clear token + cart
     const logout = () => {
         navigate('/login')
         localStorage.removeItem('token')
@@ -53,14 +58,17 @@ const Navbar = () => {
     }
 
     return (
-        <div className={`fixed top-[33px] left-0 right-0 z-50 border-b border-white/10 flex items-center justify-between px-8 font-medium bg-[#1A1A1A] transition-all duration-300 ${scrolled ? 'py-2' : 'py-4'}`}
+        <div
+            className={`fixed top-[33px] left-0 right-0 z-50 border-b border-white/10 flex items-center justify-between px-8 font-medium bg-[#1A1A1A] transition-all duration-300 ${scrolled ? 'py-2' : 'py-4'}`}
             role="banner"
         >
+
+            {/* Logo */}
             <Link to={'/'} aria-label="Interproduct - עמוד הבית">
                 <img src={assets.logo} className={`transition-all duration-300 ${scrolled ? 'w-24' : 'w-34'}`} alt="Interproduct" />
             </Link>
 
-            {/* Desktop nav */}
+            {/* Desktop navigation */}
             <nav aria-label="ניווט ראשי" className='hidden sm:flex'>
                 <ul className='flex gap-6 text-sm list-none'>
                     <li>
@@ -106,15 +114,13 @@ const Navbar = () => {
                 </ul>
             </nav>
 
-            {/* Icons */}
+            {/* ─── Icon actions: search, profile, cart, mobile toggle ───────── */}
             <div className='flex items-center gap-4'>
 
                 {/* Search */}
                 <div className='flex items-center gap-2'>
                     {showSearch && (
-                        <div className='flex items-center border border-white/20 rounded-full px-3 py-1 bg-[#2a2a2a]'
-                            role="search"
-                        >
+                        <div className='flex items-center border border-white/20 rounded-full px-3 py-1 bg-[#2a2a2a]' role="search">
                             <label htmlFor="navbar-search" className="sr-only">חיפוש מוצרים</label>
                             <input
                                 id="navbar-search"
@@ -150,7 +156,7 @@ const Navbar = () => {
                     </button>
                 </div>
 
-                {/* Profile */}
+                {/* Profile dropdown */}
                 <div className='relative' onClick={(e) => e.stopPropagation()}>
                     <button
                         onClick={() => {
@@ -165,43 +171,24 @@ const Navbar = () => {
                         <img className='w-5 invert' src={assets.profile_icon} alt="" aria-hidden="true" />
                     </button>
                     {token && profileOpen && (
-                        <div
-                            className='absolute left-0 pt-4 z-50'
-                            role="menu"
-                            aria-label="תפריט משתמש"
-                        >
+                        <div className='absolute left-0 pt-4 z-50' role="menu" aria-label="תפריט משתמש">
                             <div className='flex flex-col gap-2 w-36 py-3 px-5 bg-[#2a2a2a] text-white/70 rounded text-sm'>
-                                <button
-                                    role="menuitem"
-                                    onClick={() => { navigate('/orders'); setProfileOpen(false) }}
-                                    className='cursor-pointer hover:text-white text-right'
-                                >
-                                    ההזמנות שלי
-                                </button>
-                                <button
-                                    role="menuitem"
-                                    onClick={() => { logout(); setProfileOpen(false) }}
-                                    className='cursor-pointer hover:text-white text-right'
-                                >
-                                    התנתק
-                                </button>
+                                <button role="menuitem" onClick={() => { navigate('/orders'); setProfileOpen(false) }} className='cursor-pointer hover:text-white text-right'>ההזמנות שלי</button>
+                                <button role="menuitem" onClick={() => { logout(); setProfileOpen(false) }} className='cursor-pointer hover:text-white text-right'>התנתק</button>
                             </div>
                         </div>
                     )}
                 </div>
 
-                {/* Cart */}
+                {/* Cart with item count badge */}
                 <Link to='/cart' className='relative' aria-label={`סל קניות, ${getCartCount} פריטים`}>
                     <img src={assets.cart_icon} className='w-5 min-w-5 invert' alt="" aria-hidden="true" />
-                    <span
-                        className='absolute left-[-5px] bottom-[-5px] w-4 text-center leading-4 bg-[#C0001A] text-white aspect-square rounded-full text-[8px]'
-                        aria-hidden="true"
-                    >
+                    <span className='absolute left-[-5px] bottom-[-5px] w-4 text-center leading-4 bg-[#C0001A] text-white aspect-square rounded-full text-[8px]' aria-hidden="true">
                         {getCartCount}
                     </span>
                 </Link>
 
-                {/* Mobile menu toggle */}
+                {/* Mobile menu toggle — hidden on desktop */}
                 <button
                     onClick={() => setVisible(true)}
                     className='w-5 cursor-pointer sm:hidden flex items-center'
@@ -213,7 +200,7 @@ const Navbar = () => {
                 </button>
             </div>
 
-            {/* Mobile sidebar */}
+            {/* Mobile sidebar menu  */}
             <div
                 id="mobile-menu"
                 ref={menuRef}

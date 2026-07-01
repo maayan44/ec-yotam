@@ -12,22 +12,22 @@ const CartTotal = () => {
             <Title text1={'סיכום'} text2={'הזמנה'} />
         </div>
 
-        <div className='flex flex-col gap-2 mt-2 text-sm'>
+        <dl className='flex flex-col gap-2 mt-2 text-sm'>
             <div className='flex justify-between'>
-                <p>סכום ביניים</p>
-                <p>{formatPrice(getCartAmount())}</p>
+                <dt>סכום ביניים</dt>
+                <dd>{formatPrice(getCartAmount)}</dd>
             </div>
             <hr className='border-[#F5F5F0]' />
             <div className='flex justify-between'>
-                <p>דמי משלוח</p>
-                <p>{formatPrice(delivery_fee)}</p>
+                <dt>דמי משלוח</dt>
+                <dd>{formatPrice(delivery_fee)}</dd>
             </div>
             <hr className='border-[#F5F5F0]' />
             <div className='flex justify-between'>
-                <b>סה"כ לתשלום</b>
-                <b className='text-[#C0001A]'>{formatPrice(getCartAmount() === 0 ? 0 : getCartAmount() + delivery_fee)}</b>
+                <dt><b>סה"כ לתשלום</b></dt>
+                <dd><b className='text-[#C0001A]'>{formatPrice(getCartAmount === 0 ? 0 : getCartAmount + delivery_fee)}</b></dd>
             </div>
-        </div>
+        </dl>
     </div>
   )
 }
