@@ -1,6 +1,7 @@
 import express from 'express'
 import cors from 'cors'
 import helmet from 'helmet'
+import rateLimit from 'express-rate-limit'
 import 'dotenv/config'
 import connectDB from './config/mongodb.js'
 import connectCloudinary from './config/cloudinary.js'
@@ -33,7 +34,7 @@ app.use(
     })
 )
 
-// Permissions-Policy (not included in Helmet by default — set manually)
+// Permissions Policy
 app.use((req, res, next) => {
     res.setHeader(
         'Permissions-Policy',
@@ -61,17 +62,38 @@ app.use(cors({
     credentials: true,
 }))
 
-// Middlewares
-app.use(express.json())
+// Body Parser
+app.use(express.json({ limit: '10kb' }))
 
-// Api Endpoints
-app.use('/api/user', userRouter)
+// Rate Limiters
+// Strict limiter for auth endpoints — prevents brute-force and registration spam
+const authLimiter = rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 10,                   // 10 attempts per window
+    message: { success: false, message: 'יותר מדי ניסיונות, נסה שוב בעוד 15 דקות' },
+    standardHeaders: true,
+    legacyHeaders: false,
+})
+
+// Moderate limiter for order placement — prevents order flooding
+const orderLimiter = rateLimit({
+    windowMs: 60 * 60 * 1000, // 1 hour
+    max: 4,                   // 4 orders per hour per IP
+    message: { success: false, message: 'יותר מדי הזמנות, נסה שוב מאוחר יותר' },
+    standardHeaders: true,
+    legacyHeaders: false,
+})
+
+// API Routes
+app.use('/api/user', authLimiter, userRouter)
 app.use('/api/product', productRouter)
 app.use('/api/cart', cartRouter)
+app.use('/api/order/place', orderLimiter)
 app.use('/api/order', orderRouter)
 
 app.get('/', (req, res) => {
     res.send("API Working")
 })
 
+// Start Server
 app.listen(port, () => console.log('Server started on PORT : ' + port))
