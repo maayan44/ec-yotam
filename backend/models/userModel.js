@@ -9,7 +9,6 @@ const userSchema = new mongoose.Schema({
     businessAddress: { type: String, required: true },
     city: { type: String, required: true },
     isApproved: { type: Boolean, default: false },
-    cartData: { type: Object, default: {} },
 }, { minimize: false })
 
 const userModel = mongoose.models.user || mongoose.model('user', userSchema);

@@ -1,5 +1,7 @@
 import cartModel from "../models/cartModel.js"
 
+const GENERIC_ERROR = "אירעה שגיאה, אנא נסה שוב מאוחר יותר"
+
 // Add products to user cart
 const addToCart = async (req, res) => {
     try {
@@ -28,7 +30,7 @@ const addToCart = async (req, res) => {
 
     } catch (error) {
         console.log(error);
-        res.json({ success: false, message: error.message })
+        res.json({ success: false, message: GENERIC_ERROR })
     }
 }
 
@@ -50,7 +52,7 @@ const updateCart = async (req, res) => {
 
     } catch (error) {
         console.log(error);
-        res.json({ success: false, message: error.message })
+        res.json({ success: false, message: GENERIC_ERROR })
     }
 }
 
@@ -64,7 +66,7 @@ const getUserCart = async (req, res) => {
 
     } catch (error) {
         console.log(error);
-        res.json({ success: false, message: error.message })
+        res.json({ success: false, message: GENERIC_ERROR })
     }
 }
 

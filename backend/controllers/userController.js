@@ -3,6 +3,9 @@ import validator from "validator";
 import bcrypt from "bcrypt"
 import jwt from 'jsonwebtoken'
 
+const GENERIC_ERROR = "אירעה שגיאה, אנא נסה שוב מאוחר יותר"
+const LOGIN_FAILED = "אימייל או סיסמה שגויים"
+
 const createToken = (id) => {
     return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: '30d' }) // Every user logout after 30d
 }
@@ -14,12 +17,12 @@ const loginUser = async (req, res) => {
         const user = await userModel.findOne({ email });
 
         if (!user) {
-            return res.json({ success: false, message: "כתובת האימייל אינה מזוהה במערכת. אם נרשמת לאחרונה, ייתכן שהבקשה טרם אושרה." })
+            return res.json({ success: false, message: LOGIN_FAILED })
         }
 
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) {
-            return res.json({ success: false, message: "הסיסמה שגויה. אנא נסה שנית." })
+            return res.json({ success: false, message: LOGIN_FAILED })
         }
 
         if (!user.isApproved) {
@@ -31,7 +34,7 @@ const loginUser = async (req, res) => {
 
     } catch (error) {
         console.log(error);
-        res.json({ success: false, message: error.message })
+        res.json({ success: false, message: GENERIC_ERROR })
     }
 }
 
@@ -82,7 +85,7 @@ const registerUser = async (req, res) => {
 
     } catch (error) {
         console.log(error);
-        res.json({ success: false, message: error.message })
+        res.json({ success: false, message: GENERIC_ERROR })
     }
 }
 
@@ -98,7 +101,7 @@ const adminLogin = async (req, res) => {
         }
     } catch (error) {
         console.log(error);
-        res.json({ success: false, message: error.message })
+        res.json({ success: false, message: GENERIC_ERROR })
     }
 }
 
@@ -109,7 +112,7 @@ const getAllUsers = async (req, res) => {
         res.json({ success: true, users })
     } catch (error) {
         console.log(error);
-        res.json({ success: false, message: error.message })
+        res.json({ success: false, message: GENERIC_ERROR })
     }
 }
 
@@ -120,7 +123,7 @@ const approveUser = async (req, res) => {
         res.json({ success: true, message: "המשתמש אושר בהצלחה" })
     } catch (error) {
         console.log(error);
-        res.json({ success: false, message: error.message })
+        res.json({ success: false, message: GENERIC_ERROR })
     }
 }
 
@@ -131,7 +134,7 @@ const rejectUser = async (req, res) => {
         res.json({ success: true, message: "המשתמש נדחה והוסר מהמערכת" })
     } catch (error) {
         console.log(error);
-        res.json({ success: false, message: error.message })
+        res.json({ success: false, message: GENERIC_ERROR })
     }
 }
 

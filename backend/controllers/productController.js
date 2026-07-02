@@ -1,6 +1,8 @@
 import { v2 as cloudinary } from "cloudinary"
 import productModel from "../models/productModel.js"
 
+const GENERIC_ERROR = "אירעה שגיאה, אנא נסה שוב מאוחר יותר"
+
 // In-memory cache
 let productCache = null;
 let cacheTime = 0;
@@ -48,7 +50,7 @@ const addProduct = async (req, res) => {
 
     } catch (error) {
         console.log(error);
-        res.json({ success: false, message: error.message })
+        res.json({ success: false, message: GENERIC_ERROR })
     }
 }
 
@@ -66,7 +68,7 @@ const listProducts = async (req, res) => {
 
     } catch (error) {
         console.log(error);
-        res.json({ success: false, message: error.message })
+        res.json({ success: false, message: GENERIC_ERROR })
     }
 }
 
@@ -79,7 +81,7 @@ const removeProduct = async (req, res) => {
 
     } catch (error) {
         console.log(error);
-        res.json({ success: false, message: error.message })
+        res.json({ success: false, message: GENERIC_ERROR })
     }
 }
 
@@ -92,7 +94,7 @@ const singleProduct = async (req, res) => {
         
     } catch (error) {
         console.log(error);
-        res.json({ success: false, message: error.message })
+        res.json({ success: false, message: GENERIC_ERROR })
     }
 }
 

@@ -3,6 +3,8 @@ import cartModel from "../models/cartModel.js";
 import productModel from "../models/productModel.js";
 import sendOrderEmail from "../utils/sendEmail.js";
 
+const GENERIC_ERROR = "אירעה שגיאה, אנא נסה שוב מאוחר יותר"
+
 // Place Order
 // Called when a user submits an order from the frontend.
 // Amount is recalculated server-side from DB prices — never trusted from client.
@@ -51,7 +53,7 @@ const placeOrder = async (req, res) => {
 
     } catch (error) {
         console.log(error)
-        res.json({ success: false, message: error.message })
+        res.json({ success: false, message: GENERIC_ERROR })
     }
 }
 
@@ -63,7 +65,7 @@ const allOrders = async (req, res) => {
         res.json({ success: true, orders })
     } catch (error) {
         console.log(error)
-        res.json({ success: false, message: error.message })
+        res.json({ success: false, message: GENERIC_ERROR })
     }
 }
 
@@ -76,7 +78,7 @@ const userOrders = async (req, res) => {
         res.json({ success: true, orders })
     } catch (error) {
         console.log(error)
-        res.json({ success: false, message: error.message })
+        res.json({ success: false, message: GENERIC_ERROR })
     }
 }
 
@@ -89,7 +91,7 @@ const updateStatus = async (req, res) => {
         res.json({ success: true, message: 'Status Updated' })
     } catch (error) {
         console.log(error)
-        res.json({ success: false, message: error.message })
+        res.json({ success: false, message: GENERIC_ERROR })
     }
 }
 
@@ -101,7 +103,7 @@ const deleteOrder = async (req, res) => {
         res.json({ success: true, message: "ההזמנה בוטלה בהצלחה" })
     } catch (error) {
         console.log(error)
-        res.json({ success: false, message: error.message })
+        res.json({ success: false, message: GENERIC_ERROR })
     }
 }
 
